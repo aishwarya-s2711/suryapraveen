@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R. Praveenkumar & C. Suryaprabha – Ultra Luxury Wedding</title>
+  <title>R. Praveenkumar & C. Suryaprabha – Royal Wedding Invitation</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   
   <style>
 /* ============================
-   ULTRA-PREMIUM LUXURY THEME
+   ULTRA-PREMIUM LUXURY THEME V4
 ============================ */
 :root {
   --bg-core: #050302;
@@ -31,12 +31,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 100px; }
 body {
-  font-family: var(--font-sans);
-  background: var(--bg-core);
-  color: #ccc;
-  overflow-x: hidden;
-  line-height: 2;
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans); background: var(--bg-core); color: #ccc;
+  overflow-x: hidden; line-height: 2; -webkit-font-smoothing: antialiased;
 }
 body.locked { overflow: hidden; }
 
@@ -48,25 +44,31 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 .text-gold { color: var(--gold); }
 .tracking-ultra { letter-spacing: 0.4em; text-transform: uppercase; font-size: 0.65rem; color: var(--gold-light); }
 
-/* ============================
-   CANVAS PARTICLES
-============================ */
-#particle-canvas {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.6;
+/* ANIMATIONS */
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+.shimmer-text {
+  background: linear-gradient(90deg, var(--gold) 0%, #fff9c4 50%, var(--gold) 100%);
+  background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
+  animation: shimmer 5s linear infinite;
 }
+@keyframes flicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(0.95); } 25% { opacity: 0.9; } }
+.flame { animation: flicker 0.2s infinite alternate; transform-origin: center bottom; }
+@keyframes drawKolam { to { stroke-dashoffset: 0; } }
 
-/* ============================
-   LOADER & INVITATION CARD (3D)
-============================ */
+/* CANVAS PARTICLES */
+#particle-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.6; }
+
+/* LOADER */
 #loader {
   position: fixed; inset: 0; z-index: 10000; background: var(--bg-core);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   transition: opacity 1.5s ease;
 }
 #loader.hidden { opacity: 0; pointer-events: none; }
-.loader-svg { width: 100px; height: 100px; animation: pulse 3s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.05); } }
+.loader-svg { width: 80px; height: 120px; animation: pulse 3s infinite; filter: drop-shadow(0 0 20px rgba(212,175,55,0.3)); }
+@keyframes pulse { 0%, 100% { opacity: 0.7; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); } }
 
+/* 3D INVITATION OVERLAY */
 #invite-overlay {
   position: fixed; inset: 0; z-index: 9000;
   background: radial-gradient(circle at center, rgba(42,8,8,0.95) 0%, rgba(5,3,2,0.98) 100%);
@@ -100,79 +102,81 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 }
 .card-container.open .card-cover { transform: rotateY(-165deg); }
 
-.foil-decor {
-  position: absolute; width: 80px; height: 80px; border: 1px solid var(--gold); opacity: 0.4;
-}
+.foil-decor { position: absolute; width: 80px; height: 80px; border: 1px solid var(--gold); opacity: 0.4; }
 .foil-decor.tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
 .foil-decor.br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
 
-.cover-title { font-family: var(--font-serif); font-size: 2.8rem; color: var(--maroon); line-height: 1.1; margin: 2rem 0; }
-.cover-title span { font-size: 1.2rem; display: block; font-style: italic; color: var(--gold-dark); margin: 1rem 0; }
+.cover-title { font-family: var(--font-serif); font-size: 2.8rem; color: var(--maroon); line-height: 1.1; margin: 1rem 0; }
+.cover-title span { font-size: 1.2rem; display: block; font-style: normal; margin: 0.5rem 0; }
 
 .btn-luxury {
-  background: transparent; color: var(--maroon); border: 1px solid var(--gold-dark);
+  background: transparent; color: var(--gold); border: 1px solid var(--gold);
   padding: 1rem 3rem; font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.3em;
-  text-transform: uppercase; cursor: pointer; transition: all 0.5s ease;
-  position: relative; overflow: hidden; margin-top: 3rem;
+  text-transform: uppercase; cursor: pointer; transition: all 0.5s ease; position: relative; overflow: hidden;
 }
-.btn-luxury:hover { background: var(--gold-dark); color: #fff; transform: translateY(-2px); }
+.btn-luxury:hover { background: var(--gold); color: var(--bg-core); font-weight:bold; transform: translateY(-2px); }
 
 .card-interior { background: var(--bg-core); z-index: 1; transform: rotateY(0deg); border: 2px solid var(--gold-dark); }
 
-/* ============================
-   LAYOUT & SECTIONS
-============================ */
+/* SECTIONS */
 main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; }
-.section-pad { padding: 15rem 2rem; position: relative; display: flex; flex-direction: column; align-items: center; }
+.section-pad { padding: 12rem 2rem; position: relative; display: flex; flex-direction: column; align-items: center; }
 .container { max-width: 1000px; margin: 0 auto; text-align: center; }
 
 /* HERO */
-#hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-.hero-names { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1; margin: 2rem 0; text-shadow: 0 10px 40px rgba(212,175,55,0.2); }
-.glowing-heart {
-  display: inline-block; font-size: 1.5rem; margin: 0 1.5rem; color: var(--gold);
-  animation: heartbeat 2s infinite ease-in-out;
-}
+#hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top:0; }
+.hero-names { font-size: clamp(3rem, 7vw, 6rem); line-height: 1; margin: 2rem 0; text-shadow: 0 10px 40px rgba(212,175,55,0.2); }
+.glowing-heart { display: inline-block; font-size: 1.5rem; margin: 0 1.5rem; color: var(--gold); animation: heartbeat 2s infinite ease-in-out; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 20px var(--gold)); } }
-.hero-glass-desc {
-  margin: 4rem auto 0; max-width: 500px; padding: 2rem;
-  background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); backdrop-filter: blur(10px);
-}
+.hero-glass-desc { margin: 4rem auto; max-width: 500px; padding: 2rem; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); backdrop-filter: blur(10px); }
 
-/* COUNTDOWN SECTION */
-.countdown-grid {
-  display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 4rem;
-}
-.cd-box {
-  background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.2);
-  padding: 2.5rem 2rem; width: 140px; text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
-}
+/* COUNTDOWN */
+.countdown-grid { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 4rem; }
+.cd-box { background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.2); padding: 2.5rem 2rem; width: 140px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
 .cd-num { font-family: var(--font-serif); font-size: 3rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
 .cd-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
 
 /* EVENT & CALENDAR */
 .premium-card {
-  background: #0f0a07; border: 1px solid rgba(212,175,55,0.15); padding: 5rem 3rem;
-  max-width: 800px; margin: 0 auto; position: relative;
+  background: rgba(15,10,7,0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(212,175,55,0.3); padding: 5rem 3rem; max-width: 800px; margin: 0 auto; position: relative;
   box-shadow: 0 30px 60px rgba(0,0,0,0.8);
 }
 .floral-arch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 150px; opacity: 0.5; }
 
-/* LOCATION MAP */
 .map-wrapper { margin-top: 4rem; position: relative; border-radius: 4px; overflow: hidden; border: 1px solid rgba(212,175,55,0.2); }
 .map-wrapper iframe { width: 100%; height: 400px; border: none; filter: grayscale(50%) contrast(110%) sepia(20%); }
 
+/* VISUAL CALENDAR */
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; margin-top: 4rem; text-align: center; font-family: var(--font-serif); font-size: 1.2rem; color: #aaa; }
+.cal-day-name { font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--gold-dark); text-transform: uppercase; }
+.cal-day { padding: 1rem; position: relative; }
+.cal-highlight { color: var(--bg-core) !important; font-weight: bold; position: relative; z-index: 1; }
+.cal-highlight::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 50px; height: 50px; background: var(--gold); border-radius: 50%; z-index: -1;
+  box-shadow: 0 0 20px var(--gold); animation: pulse-ring 2s infinite;
+}
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 70% { box-shadow: 0 0 0 20px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+
+/* GALLERY */
+.gallery-grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-top: 4rem; }
+.gallery-item {
+  width: 300px; height: 400px; position: relative; overflow: hidden;
+  border: 8px solid #111; box-shadow: 0 0 0 2px var(--gold-dark), 0 20px 50px rgba(0,0,0,0.8);
+}
+.gallery-img { width: 100%; height: 100%; background: #222; object-fit: cover; transition: transform 1s ease; }
+.gallery-item:hover .gallery-img { transform: scale(1.05); }
+
 /* THANK YOU */
-.grand-kuthuvilakku { width: 120px; opacity: 0.8; margin-bottom: 3rem; filter: drop-shadow(0 0 20px rgba(212,175,55,0.2)); }
 .signature-svg { width: 300px; margin: 4rem auto; stroke: var(--gold); stroke-width: 1; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 4s ease; }
 .in-view .signature-svg { stroke-dashoffset: 0; }
 
-/* REVEAL ANIMATIONS */
+/* REVEAL */
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 2s var(--trans-slow), transform 2s var(--trans-slow); }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-/* MUSIC PLAYER */
+/* MUSIC WIDGET */
 #music-widget {
   position: fixed; bottom: 3rem; right: 3rem; display: flex; align-items: center; gap: 1rem;
   background: rgba(10,6,4,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.2);
@@ -187,18 +191,13 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .vinyl-record::after { content:''; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
 .vinyl-record.spinning { animation: spin 3s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
-.music-controls { display: flex; align-items: center; gap: 1rem; }
-#vol-slider {
-  -webkit-appearance: none; width: 60px; background: transparent; margin: 0;
-}
-#vol-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; height: 10px; width: 10px; border-radius: 50%;
-  background: var(--gold); cursor: pointer; margin-top: -4px;
-}
-#vol-slider::-webkit-slider-runnable-track {
-  width: 100%; height: 2px; cursor: pointer; background: rgba(212,175,55,0.3);
-}
-#vol-slider:focus { outline: none; }
+.music-controls { display: flex; align-items: center; gap: 0.5rem; }
+.music-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 1rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
+#vol-slider { width: 80px; accent-color: var(--gold); cursor: pointer; }
+
+/* KOLAM ANIMATION */
+.kolam-svg { stroke: var(--ivory); stroke-width: 0.5; fill: none; opacity: 0.3; stroke-dasharray: 500; stroke-dashoffset: 500; transition: stroke-dashoffset 5s ease; }
+.in-view .kolam-svg { stroke-dashoffset: 0; }
 
 @media (max-width: 768px) {
   .section-pad { padding: 8rem 1.5rem; }
@@ -208,25 +207,32 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
   .cd-num { font-size: 2rem; }
   .premium-card { padding: 3rem 1.5rem; }
   #music-widget { bottom: 1.5rem; right: 1.5rem; padding: 0.5rem; }
-  .music-controls { display: none; } /* Hide volume on mobile to save space */
+  .music-controls { display: none; }
+  .cal-grid { font-size: 1rem; gap: 0.5rem; }
+  .cal-highlight::before { width: 35px; height: 35px; }
 }
 </style>
 </head>
 <body class="locked">
 
-  <!-- CANVAS BACKGROUND -->
+  <!-- CANVAS PARTICLES -->
   <canvas id="particle-canvas"></canvas>
 
   <!-- LOADER -->
   <div id="loader">
-    <svg class="loader-svg" viewBox="0 0 100 100">
-      <path d="M50,20 Q60,40 50,60 Q40,40 50,20" fill="none" stroke="var(--gold)" stroke-width="1"/>
-      <circle cx="50" cy="50" r="30" fill="none" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="2 4"/>
+    <!-- Glowing Kuthuvilakku SVG for loader -->
+    <svg class="loader-svg" viewBox="0 0 100 150">
+      <path d="M30,140 L70,140 L75,150 L25,150 Z" fill="var(--gold-dark)"/>
+      <path d="M40,130 L60,130 L70,140 L30,140 Z" fill="var(--gold)"/>
+      <rect x="48" y="60" width="4" height="70" fill="var(--gold-light)"/>
+      <path d="M30,60 Q50,80 70,60 L60,50 L40,50 Z" fill="var(--gold)"/>
+      <!-- Flickering flame -->
+      <path class="flame" d="M50,40 Q53,30 50,15 Q47,30 50,40 Z" fill="#fff9c4"/>
     </svg>
-    <p class="tracking-ultra" style="margin-top:2rem;">The Royal Union</p>
+    <p class="tracking-ultra" style="margin-top:2rem;">Awakening The Light</p>
   </div>
 
-  <!-- YOUTUBE AUDIO -->
+  <!-- YOUTUBE AUDIO (HIDDEN) -->
   <div id="youtube-audio" style="position: absolute; width:0; height:0; opacity:0; pointer-events:none;"></div>
 
   <!-- 3D INVITATION OVERLAY -->
@@ -237,18 +243,15 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         <div class="foil-decor tl"></div>
         <div class="foil-decor br"></div>
         
-        <p class="tracking-ultra" style="color:var(--gold-dark); margin-bottom:2rem;">Wedding Reception</p>
-        <h2 class="cover-title">R. Praveenkumar <span>❤️</span> C. Suryaprabha</h2>
-        <p class="tracking-ultra" style="color:#777; margin-top:2rem;">22 August 2026</p>
+        <p class="tracking-ultra" style="color:var(--gold-dark); margin-bottom:1rem;">🪔 Wedding Reception Invitation</p>
+        <h2 class="cover-title">R. Praveenkumar<br><span>❤️</span><br>C. Suryaprabha</h2>
+        <p class="tracking-ultra" style="color:#777; margin: 1rem 0 2rem;">22 August 2026</p>
+        <p style="font-family: var(--font-serif); font-style: italic; color: var(--maroon); margin-bottom: 2rem;">Cordially Invites You</p>
         
-        <button class="btn-luxury" id="open-btn">Open Invitation</button>
+        <button class="btn-luxury" style="background:var(--gold); color:var(--bg-core); font-weight:bold;" id="open-btn">OPEN INVITATION</button>
       </div>
       <div class="card-panel card-interior">
         <div class="paper-texture"></div>
-        <svg width="60" height="60" viewBox="0 0 100 100" style="margin-bottom:2rem;">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="var(--gold-dark)" stroke-width="1" stroke-dasharray="4 4" />
-          <path d="M50,20 L60,40 L80,50 L60,60 L50,80 L40,60 L20,50 L40,40 Z" fill="var(--gold-dark)" opacity="0.3"/>
-        </svg>
         <p style="font-family:var(--font-serif); font-size:1.2rem; font-style:italic; max-width:80%; line-height:2;">
           "Two souls, one beautiful journey. Join us as we celebrate the beginning of our forever."
         </p>
@@ -258,49 +261,53 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
   <!-- MUSIC WIDGET -->
   <div id="music-widget">
-    <div class="vinyl-record" id="vinyl-btn"></div>
+    <div class="vinyl-record" id="vinyl-btn" title="Click to Spin/Pause"></div>
     <div class="music-controls">
-      <span class="tracking-ultra" style="font-size:0.5rem; color:#888;">Vol</span>
-      <input type="range" id="vol-slider" min="0" max="100" value="60">
+      <button class="music-btn" id="play-pause-btn" title="Play/Pause">⏸</button>
+      <button class="music-btn" id="mute-btn" title="Mute/Unmute">🔊</button>
+      <input type="range" id="vol-slider" min="0" max="100" value="60" title="Volume">
     </div>
   </div>
 
   <main id="main">
     
     <!-- HERO -->
-    <section id="hero" class="section-pad" style="padding-top: 0;">
-      <div class="container" style="margin-top: 10vh;">
-        <p class="tracking-ultra reveal">Cordially Invites You</p>
-        <h1 class="hero-names reveal" style="transition-delay:0.2s;">
-          Praveenkumar <span class="glowing-heart">❤️</span> Suryaprabha
+    <section id="hero" class="section-pad">
+      <div class="container" style="margin-top: 5vh;">
+        <p class="tracking-ultra reveal" style="margin-bottom: 2rem;">Wedding Reception</p>
+        <h1 class="hero-names reveal shimmer-text" style="transition-delay:0.2s;">
+          R. Praveenkumar <span class="glowing-heart" style="color:var(--ivory); animation:none; filter:none; text-shadow:none;">❤️</span> C. Suryaprabha
         </h1>
         <div class="hero-glass-desc reveal" style="transition-delay:0.4s;">
           <p>"With hearts full of joy, we warmly invite you to celebrate our Wedding Reception and bless us with your gracious presence."</p>
         </div>
+        <button id="save-date-btn" class="btn-luxury reveal" style="margin-top:2rem; background: var(--gold); color: var(--bg-core); font-weight: bold; border: none; transition-delay:0.6s;">Save the Date</button>
+      </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section id="quotes" class="section-pad">
+      <div class="container reveal">
+        <svg class="kolam-svg" viewBox="0 0 100 100" style="width:150px; margin:0 auto 2rem; display:block;">
+          <path d="M50,10 Q90,50 50,90 Q10,50 50,10" />
+          <circle cx="50" cy="50" r="20" />
+        </svg>
+        <blockquote style="font-family: var(--font-serif); font-size: 2rem; font-style: italic; color: var(--gold-light); line-height: 1.8; max-width: 800px; margin: 0 auto;">
+          "Anbum aranum udaithaayin ilvaazhkkai<br>Panbum payanum adhu."<br>
+          <span style="display:block; font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; margin-top: 2rem; color: #888;">— Thirukkural</span>
+        </blockquote>
       </div>
     </section>
 
     <!-- COUNTDOWN -->
     <section id="countdown" class="section-pad">
       <div class="container reveal">
-        <h2 style="font-size: 2rem; margin-bottom: 2rem; color:var(--gold);">The Wait Is Almost Over</h2>
+        <h2 class="shimmer-text" style="font-size: 2rem; margin-bottom: 2rem;">The Wait Is Almost Over</h2>
         <div class="countdown-grid">
-          <div class="cd-box">
-            <div class="cd-num" id="cd-days">00</div>
-            <div class="cd-label">Days</div>
-          </div>
-          <div class="cd-box">
-            <div class="cd-num" id="cd-hours">00</div>
-            <div class="cd-label">Hours</div>
-          </div>
-          <div class="cd-box">
-            <div class="cd-num" id="cd-mins">00</div>
-            <div class="cd-label">Minutes</div>
-          </div>
-          <div class="cd-box">
-            <div class="cd-num" id="cd-secs">00</div>
-            <div class="cd-label">Seconds</div>
-          </div>
+          <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
+          <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+          <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+          <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
         </div>
       </div>
     </section>
@@ -314,13 +321,13 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
             <circle cx="50" cy="20" r="3" fill="var(--gold)"/>
           </svg>
           
-          <h2 style="font-size:2.5rem; margin-bottom: 4rem; color:var(--ivory);">The Grand Reception</h2>
+          <h2 class="shimmer-text" style="font-size:2.5rem; margin-bottom: 4rem;">The Grand Reception</h2>
           
           <div style="margin-bottom: 3rem;">
             <p class="tracking-ultra">Date & Time</p>
             <h3 style="font-size:1.8rem; margin:1rem 0; color:var(--gold);">22 August 2026</h3>
             <p>6:00 PM – 9:00 PM</p>
-            <button id="add-calendar-btn" class="btn-luxury" style="margin-top:2rem;">Add to Google Calendar</button>
+            <button id="add-calendar-btn-event" class="btn-luxury" style="margin-top:2rem; position: relative; z-index: 10; cursor: pointer;">Add to Google Calendar</button>
           </div>
           
           <hr style="border:0; height:1px; background:linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent); margin:4rem 0;">
@@ -328,33 +335,54 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
           <div>
             <p class="tracking-ultra">Venue</p>
             <h3 style="font-size:1.8rem; margin:1rem 0; color:var(--gold);">Yamuna Palace</h3>
-            <p>319/1 Mullupadi Village, Pollachi Main Road<br>Tamil Nadu – 642109</p>
+            <p style="line-height: 1.8;">319/1 Mullupadi Village<br>Pollachi Main Road<br>Mulluppadi<br>Tamil Nadu – 642109</p>
             
             <div class="map-wrapper">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.6917637500595!2d76.99342711531238!3d10.445963292546416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba836b2809fb0ab%3A0xc3c9a0937a075306!2sPollachi%20Main%20Rd%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1689000000000!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             
-            <button onclick="window.open('https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi', '_blank')" class="btn-luxury" style="margin-top:2rem;">Open in Maps</button>
+            <button onclick="window.open('https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi', '_blank')" class="btn-luxury" style="margin-top:2rem; background: var(--gold); color: #000; font-weight: bold; border: none; position: relative; z-index: 10; cursor: pointer;">Open in Maps</button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- CALENDAR -->
+    <section id="calendar" class="section-pad">
+      <div class="container reveal">
+        <h2 class="shimmer-text" style="font-size:2.5rem; margin-bottom: 1rem;">August 2026</h2>
+        <p class="tracking-ultra">Mark Your Calendar</p>
+        
+        <div style="max-width: 600px; margin: 0 auto;">
+          <div class="cal-grid">
+            <div class="cal-day-name">Sun</div><div class="cal-day-name">Mon</div><div class="cal-day-name">Tue</div><div class="cal-day-name">Wed</div><div class="cal-day-name">Thu</div><div class="cal-day-name">Fri</div><div class="cal-day-name">Sat</div>
+            <!-- Blank days for August 2026 (Starts on Saturday) -->
+            <div></div><div></div><div></div><div></div><div></div><div></div>
+            <div class="cal-day">1</div>
+            <div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
+            <div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div>
+            <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day cal-highlight">22</div>
+            <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+            <div class="cal-day">30</div><div class="cal-day">31</div>
+          </div>
+        </div>
+        <button id="add-calendar-btn" class="btn-luxury" style="margin-top:4rem;">Add to Google Calendar</button>
+      </div>
+    </section>
+
+
+
     <!-- THANK YOU -->
     <section id="thank-you" class="section-pad">
       <div class="container reveal">
-        <svg class="grand-kuthuvilakku" viewBox="0 0 100 200">
-          <!-- Base -->
+        <svg class="grand-kuthuvilakku" viewBox="0 0 100 200" style="width: 150px; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(212,175,55,0.2));">
           <path d="M20,190 L80,190 L85,200 L15,200 Z" fill="var(--gold-dark)"/>
           <path d="M30,180 L70,180 L80,190 L20,190 Z" fill="var(--gold)"/>
-          <!-- Stem -->
           <rect x="46" y="80" width="8" height="100" fill="var(--gold-light)"/>
-          <!-- Top bowl -->
           <path d="M25,80 Q50,100 75,80 L65,70 L35,70 Z" fill="var(--gold)"/>
-          <!-- Flames -->
-          <path d="M50,50 Q55,40 50,20 Q45,40 50,50 Z" fill="#fff9c4"/>
-          <path d="M25,65 Q30,60 25,50 Q20,60 25,65 Z" fill="#fff9c4"/>
-          <path d="M75,65 Q80,60 75,50 Q70,60 75,65 Z" fill="#fff9c4"/>
+          <path class="flame" d="M50,50 Q55,40 50,20 Q45,40 50,50 Z" fill="#fff9c4"/>
+          <path class="flame" d="M25,65 Q30,60 25,50 Q20,60 25,65 Z" fill="#fff9c4" style="animation-delay: 0.1s;"/>
+          <path class="flame" d="M75,65 Q80,60 75,50 Q70,60 75,65 Z" fill="#fff9c4" style="animation-delay: 0.2s;"/>
         </svg>
         
         <h2 style="font-size:2.5rem; line-height:1.5; color:var(--ivory);">
@@ -372,7 +400,6 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
   </main>
 
-  <!-- YOUTUBE API & SCRIPTS -->
   <script>
     /* ==================================
        YOUTUBE AUDIO SETUP
@@ -380,9 +407,8 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     let ytPlayer;
     let isYtReady = false;
     let playing = false;
-    let savedVol = localStorage.getItem('ytVolume');
-    let savedPlaying = localStorage.getItem('ytPlaying');
-    let currentVol = savedVol !== null ? parseInt(savedVol) : 60;
+    let currentVol = parseInt(sessionStorage.getItem('ps_music_vol')) || 60;
+    let isMuted = sessionStorage.getItem('ps_music_muted') === 'true';
     let fadeInterval;
     
     const tag = document.createElement('script');
@@ -394,18 +420,47 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       ytPlayer = new YT.Player('youtube-audio', {
         height: '0',
         width: '0',
-        videoId: 'nDeGKa1dh2w',
-        playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playlist': 'nDeGKa1dh2w', 'playsinline': 1 },
-        events: { 'onReady': () => isYtReady = true }
+        videoId: 'h9toiopKXEQ',
+        playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playlist': 'h9toiopKXEQ', 'playsinline': 1 },
+        events: { 'onReady': onPlayerReady }
       });
     }
 
+    function onPlayerReady() {
+      isYtReady = true;
+      document.getElementById('vol-slider').value = currentVol;
+      updateMuteIcon();
+    }
+
+    function fadeAudio(targetVolume, durationMs, callback) {
+      clearInterval(fadeInterval);
+      if (!isYtReady) return;
+      let startVol = ytPlayer.getVolume();
+      let steps = 20;
+      let stepTime = durationMs / steps;
+      let volDiff = targetVolume - startVol;
+      let stepVol = volDiff / steps;
+      let currentStep = 0;
+
+      if (targetVolume > 0 && ytPlayer.getPlayerState() !== 1) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
+
+      fadeInterval = setInterval(() => {
+        currentStep++;
+        let newVol = Math.max(0, Math.min(100, startVol + (stepVol * currentStep)));
+        ytPlayer.setVolume(newVol);
+        if (currentStep >= steps) {
+          clearInterval(fadeInterval);
+          ytPlayer.setVolume(targetVolume);
+          if (targetVolume === 0 && ytPlayer.getPlayerState() === 1 && !isMuted) ytPlayer.pauseVideo();
+          if (callback) callback();
+        }
+      }, stepTime);
+    }
+
     /* ==================================
-       LOADER & 3D INVITATION LOGIC
+       LOADER & INVITATION LOGIC
     ================================== */
-    window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000);
-    });
+    window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000); });
 
     const overlay = document.getElementById('invite-overlay');
     const card = document.getElementById('card');
@@ -413,6 +468,9 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     const main = document.getElementById('main');
     const musicWidget = document.getElementById('music-widget');
     const vinylBtn = document.getElementById('vinyl-btn');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const muteBtn = document.getElementById('mute-btn');
+    const volSlider = document.getElementById('vol-slider');
 
     overlay.addEventListener('mousemove', e => {
       if(!card.classList.contains('open')) {
@@ -426,25 +484,17 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       card.style.transform = 'rotateY(0deg) rotateX(0deg)';
       card.classList.add('open');
       
-      // Floating petals
       const emojis = ['🌸', '🌼', '🍃'];
-      for(let i=0; i<40; i++) {
+      for(let i=0; i<50; i++) {
         setTimeout(() => {
           const p = document.createElement('div');
           p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-          p.style.position = 'fixed';
-          p.style.left = Math.random() * 100 + 'vw';
-          p.style.top = '-10vh';
-          p.style.zIndex = 9999;
-          p.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
-          p.style.transition = 'all 8s linear';
+          p.style.position = 'fixed'; p.style.left = Math.random() * 100 + 'vw'; p.style.top = '-10vh';
+          p.style.zIndex = 9999; p.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem'; p.style.transition = 'all 8s linear';
           document.body.appendChild(p);
-          
-          setTimeout(() => {
-            p.style.transform = `translateY(110vh) rotate(${Math.random() * 720}deg) translateX(${(Math.random()-0.5)*200}px)`;
-          }, 50);
+          setTimeout(() => { p.style.transform = `translateY(110vh) rotate(${Math.random() * 720}deg) translateX(${(Math.random()-0.5)*200}px)`; }, 50);
           setTimeout(() => p.remove(), 8000);
-        }, i * 150);
+        }, i * 100);
       }
 
       setTimeout(() => {
@@ -453,92 +503,57 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         main.style.opacity = '1';
         musicWidget.classList.add('show');
         checkScroll();
-      }, 3000);
+      }, 2500);
 
-      // Play Audio
-      if (isYtReady && ytPlayer && ytPlayer.playVideo) {
-        if (savedPlaying !== 'false') {
-          ytPlayer.setVolume(0);
-          ytPlayer.playVideo();
-          playing = true;
-          vinylBtn.classList.add('spinning');
-          fadeAudio(currentVol, 2500);
-        } else {
-          ytPlayer.setVolume(currentVol);
-        }
+      if (isYtReady) {
+        if (isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
+        else { fadeAudio(currentVol, 2500); }
+        playing = true;
+        vinylBtn.classList.add('spinning');
+        playPauseBtn.innerText = '⏸';
       }
     });
 
     /* ==================================
        MUSIC CONTROLS
     ================================== */
-    vinylBtn.addEventListener('click', () => {
-      if (!isYtReady || !ytPlayer || !ytPlayer.playVideo) return;
-      if (playing) {
-        vinylBtn.classList.remove('spinning');
+    function togglePlay() {
+      if (!isYtReady) return;
+      if (playing) { 
         fadeAudio(0, 1500, () => ytPlayer.pauseVideo());
-        playing = false;
-        localStorage.setItem('ytPlaying', 'false');
-      } else {
-        ytPlayer.setVolume(0);
-        ytPlayer.playVideo();
-        vinylBtn.classList.add('spinning');
-        fadeAudio(currentVol, 2500);
-        playing = true;
-        localStorage.setItem('ytPlaying', 'true');
+        vinylBtn.classList.remove('spinning'); playPauseBtn.innerText = '▶';
+      } else { 
+        if(isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
+        else fadeAudio(currentVol, 1500);
+        vinylBtn.classList.add('spinning'); playPauseBtn.innerText = '⏸';
       }
-    });
-
-    const volSlider = document.getElementById('vol-slider');
-    if (volSlider) volSlider.value = currentVol;
-    volSlider.addEventListener('input', (e) => {
-      currentVol = parseInt(e.target.value);
-      localStorage.setItem('ytVolume', currentVol);
-      if (isYtReady && ytPlayer && playing) {
-        clearInterval(fadeInterval);
-        ytPlayer.setVolume(currentVol);
-      }
-    });
-
-    function fadeAudio(targetVolume, durationMs = 2000, onComplete = null) {
-      if (!ytPlayer || !ytPlayer.getVolume) return;
-      clearInterval(fadeInterval);
-      const startVolume = ytPlayer.getVolume();
-      const diff = targetVolume - startVolume;
-      const steps = 20;
-      const stepTime = durationMs / steps;
-      let currentStep = 0;
-      
-      fadeInterval = setInterval(() => {
-        currentStep++;
-        let newVol = startVolume + (diff * (currentStep / steps));
-        ytPlayer.setVolume(newVol);
-        if (currentStep >= steps) {
-          clearInterval(fadeInterval);
-          ytPlayer.setVolume(targetVolume);
-          if (onComplete) onComplete();
-        }
-      }, stepTime);
+      playing = !playing;
     }
+    vinylBtn.addEventListener('click', togglePlay);
+    playPauseBtn.addEventListener('click', togglePlay);
+
+    function updateMuteIcon() { muteBtn.innerText = isMuted ? '🔇' : '🔊'; }
+    muteBtn.addEventListener('click', () => {
+      if (!isYtReady) return;
+      isMuted = !isMuted; sessionStorage.setItem('ps_music_muted', isMuted); updateMuteIcon();
+      if(playing) { if (isMuted) fadeAudio(0, 1000); else fadeAudio(currentVol, 1000); }
+    });
+    volSlider.addEventListener('input', (e) => {
+      currentVol = parseInt(e.target.value); sessionStorage.setItem('ps_music_vol', currentVol);
+      if (playing && !isMuted && isYtReady) ytPlayer.setVolume(currentVol);
+    });
 
     /* ==================================
-       COUNTDOWN TIMER LOGIC
+       COUNTDOWN TIMER
     ================================== */
     const targetDate = new Date("Aug 22, 2026 18:00:00").getTime();
     setInterval(() => {
-      const now = new Date().getTime();
-      const dist = targetDate - now;
+      const now = new Date().getTime(); const dist = targetDate - now;
       if (dist < 0) return;
-      
-      const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-      const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((dist % (1000 * 60)) / 1000);
-      
-      document.getElementById("cd-days").innerText = d < 10 ? "0"+d : d;
-      document.getElementById("cd-hours").innerText = h < 10 ? "0"+h : h;
-      document.getElementById("cd-mins").innerText = m < 10 ? "0"+m : m;
-      document.getElementById("cd-secs").innerText = s < 10 ? "0"+s : s;
+      document.getElementById("cd-days").innerText = String(Math.floor(dist / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      document.getElementById("cd-hours").innerText = String(Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      document.getElementById("cd-mins").innerText = String(Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      document.getElementById("cd-secs").innerText = String(Math.floor((dist % (1000 * 60)) / 1000)).padStart(2, '0');
     }, 1000);
 
     /* ==================================
@@ -552,60 +567,34 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     }
 
     /* ==================================
-       GOOGLE CALENDAR BUTTON
+       BUTTONS
     ================================== */
-    document.getElementById('add-calendar-btn').addEventListener('click', (e) => {
-      e.preventDefault();
-      const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Surya+%26+Praveenkumar+Wedding+Reception&dates=20260822T123000Z/20260822T153000Z&details=You+are+cordially+invited+to+our+Wedding+Reception!%0A%0AWith+Love,%0AR.+Praveenkumar+%E2%9D%A4%EF%B8%8F+C.+Suryaprabha&location=Yamuna+Palace,+319/1+Mullupadi+Village,+Pollachi+Main+Road,+Tamil+Nadu';
-      window.open(url, '_blank');
-    });
+    const calUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Surya+%26+Praveenkumar+Wedding+Reception&dates=20260822T123000Z/20260822T153000Z&details=You+are+cordially+invited+to+our+Wedding+Reception!%0A%0AWith+Love,%0AR.+Praveenkumar+%E2%9D%A4%EF%B8%8F+C.+Suryaprabha&location=Yamuna+Palace,+319/1+Mullupadi+Village,+Pollachi+Main+Road,+Tamil+Nadu';
+    document.getElementById('add-calendar-btn').addEventListener('click', (e) => { e.preventDefault(); window.open(calUrl, '_blank'); });
+    if(document.getElementById('add-calendar-btn-event')) {
+      document.getElementById('add-calendar-btn-event').addEventListener('click', (e) => { e.preventDefault(); window.open(calUrl, '_blank'); });
+    }
+    document.getElementById('save-date-btn').addEventListener('click', (e) => { e.preventDefault(); window.open(calUrl, '_blank'); });
 
     /* ==================================
-       HTML5 CANVAS GOLDEN PARTICLES
+       CANVAS PARTICLES
     ================================== */
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
     class Particle {
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedY = Math.random() * -0.5 - 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.5 + 0.1;
+        this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5; this.speedY = Math.random() * -0.5 - 0.1;
+        this.speedX = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.5 + 0.1;
       }
-      update() {
-        this.y += this.speedY;
-        this.x += this.speedX;
-        if (this.y < 0) {
-          this.y = canvas.height;
-          this.x = Math.random() * canvas.width;
-        }
-      }
-      draw() {
-        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      update() { this.y += this.speedY; this.x += this.speedX; if (this.y < 0) { this.y = canvas.height; this.x = Math.random() * canvas.width; } }
+      draw() { ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
-
     for (let i = 0; i < 80; i++) particles.push(new Particle());
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animate);
-    }
+    function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
     animate();
   </script>
 </body>
