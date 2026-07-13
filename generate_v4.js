@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R. Praveenkumar & C. Suryaprabha – Royal Wedding Invitation</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  
-  <style>
+const fs = require('fs');
+
+const css = `
 /* ============================
    ULTRA-PREMIUM LUXURY THEME V4
 ============================ */
@@ -211,7 +202,20 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
   .cal-grid { font-size: 1rem; gap: 0.5rem; }
   .cal-highlight::before { width: 35px; height: 35px; }
 }
-</style>
+`;
+
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R. Praveenkumar & C. Suryaprabha – Royal Wedding Invitation</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>${css}</style>
 </head>
 <body class="locked">
 
@@ -285,7 +289,19 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       </div>
     </section>
 
-
+    <!-- QUOTES -->
+    <section id="quotes" class="section-pad">
+      <div class="container reveal">
+        <svg class="kolam-svg" viewBox="0 0 100 100" style="width:150px; margin:0 auto 2rem; display:block;">
+          <path d="M50,10 Q90,50 50,90 Q10,50 50,10" />
+          <circle cx="50" cy="50" r="20" />
+        </svg>
+        <blockquote style="font-family: var(--font-serif); font-size: 2rem; font-style: italic; color: var(--gold-light); line-height: 1.8; max-width: 800px; margin: 0 auto;">
+          "Anbum aranum udaithaayin ilvaazhkkai<br>Panbum payanum adhu."<br>
+          <span style="display:block; font-family: var(--font-sans); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.3em; margin-top: 2rem; color: #888;">— Thirukkural</span>
+        </blockquote>
+      </div>
+    </section>
 
     <!-- COUNTDOWN -->
     <section id="countdown" class="section-pad">
@@ -315,7 +331,6 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
             <p class="tracking-ultra">Date & Time</p>
             <h3 style="font-size:1.8rem; margin:1rem 0; color:var(--gold);">22 August 2026</h3>
             <p>6:00 PM – 9:00 PM</p>
-            <button id="add-calendar-btn-event" class="btn-luxury" style="margin-top:2rem; position: relative; z-index: 10; cursor: pointer;">Add to Google Calendar</button>
           </div>
           
           <hr style="border:0; height:1px; background:linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent); margin:4rem 0;">
@@ -329,15 +344,47 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.6917637500595!2d76.99342711531238!3d10.445963292546416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba836b2809fb0ab%3A0xc3c9a0937a075306!2sPollachi%20Main%20Rd%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1689000000000!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             
-            <button onclick="window.open('https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi', '_blank')" class="btn-luxury" style="margin-top:2rem; background: var(--gold); color: #000; font-weight: bold; border: none; position: relative; z-index: 10; cursor: pointer;">Open in Maps</button>
+            <button onclick="window.open('https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi', '_blank')" class="btn-luxury" style="margin-top:2rem; background: var(--gold); color: var(--bg-core); font-weight: bold; border: none;">View on Google Maps</button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- CALENDAR -->
+    <section id="calendar" class="section-pad">
+      <div class="container reveal">
+        <h2 class="shimmer-text" style="font-size:2.5rem; margin-bottom: 1rem;">August 2026</h2>
+        <p class="tracking-ultra">Mark Your Calendar</p>
+        
+        <div style="max-width: 600px; margin: 0 auto;">
+          <div class="cal-grid">
+            <div class="cal-day-name">Sun</div><div class="cal-day-name">Mon</div><div class="cal-day-name">Tue</div><div class="cal-day-name">Wed</div><div class="cal-day-name">Thu</div><div class="cal-day-name">Fri</div><div class="cal-day-name">Sat</div>
+            <!-- Blank days for August 2026 (Starts on Saturday) -->
+            <div></div><div></div><div></div><div></div><div></div><div></div>
+            <div class="cal-day">1</div>
+            <div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
+            <div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div>
+            <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day cal-highlight">22</div>
+            <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+            <div class="cal-day">30</div><div class="cal-day">31</div>
+          </div>
+        </div>
+        <button id="add-calendar-btn" class="btn-luxury" style="margin-top:4rem;">Add to Google Calendar</button>
+      </div>
+    </section>
 
-
-
+    <!-- GALLERY -->
+    <section id="gallery" class="section-pad">
+      <div class="container reveal">
+        <h2 class="shimmer-text" style="font-size:2.5rem; margin-bottom: 2rem;">Cherished Moments</h2>
+        <div class="gallery-grid">
+          <!-- Placeholders, user needs to swap src -->
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding" class="gallery-img"></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding" class="gallery-img"></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding" class="gallery-img"></div>
+        </div>
+      </div>
+    </section>
 
     <!-- THANK YOU -->
     <section id="thank-you" class="section-pad">
@@ -443,7 +490,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       if(!card.classList.contains('open')) {
         const x = (window.innerWidth / 2 - e.pageX) / 40;
         const y = (window.innerHeight / 2 - e.pageY) / 40;
-        card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        card.style.transform = \`rotateY(\${x}deg) rotateX(\${y}deg)\`;
       }
     });
 
@@ -459,7 +506,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
           p.style.position = 'fixed'; p.style.left = Math.random() * 100 + 'vw'; p.style.top = '-10vh';
           p.style.zIndex = 9999; p.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem'; p.style.transition = 'all 8s linear';
           document.body.appendChild(p);
-          setTimeout(() => { p.style.transform = `translateY(110vh) rotate(${Math.random() * 720}deg) translateX(${(Math.random()-0.5)*200}px)`; }, 50);
+          setTimeout(() => { p.style.transform = \`translateY(110vh) rotate(\${Math.random() * 720}deg) translateX(\${(Math.random()-0.5)*200}px)\`; }, 50);
           setTimeout(() => p.remove(), 8000);
         }, i * 100);
       }
@@ -537,15 +584,8 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
        BUTTONS
     ================================== */
     const calUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Surya+%26+Praveenkumar+Wedding+Reception&dates=20260822T123000Z/20260822T153000Z&details=You+are+cordially+invited+to+our+Wedding+Reception!%0A%0AWith+Love,%0AR.+Praveenkumar+%E2%9D%A4%EF%B8%8F+C.+Suryaprabha&location=Yamuna+Palace,+319/1+Mullupadi+Village,+Pollachi+Main+Road,+Tamil+Nadu';
-    if(document.getElementById('add-calendar-btn')) {
-      document.getElementById('add-calendar-btn').addEventListener('click', (e) => { e.preventDefault(); window.location.href = calUrl; });
-    }
-    if(document.getElementById('add-calendar-btn-event')) {
-      document.getElementById('add-calendar-btn-event').addEventListener('click', (e) => { e.preventDefault(); window.location.href = calUrl; });
-    }
-    if(document.getElementById('save-date-btn')) {
-      document.getElementById('save-date-btn').addEventListener('click', (e) => { e.preventDefault(); window.location.href = calUrl; });
-    }
+    document.getElementById('add-calendar-btn').addEventListener('click', (e) => { e.preventDefault(); window.open(calUrl, '_blank'); });
+    document.getElementById('save-date-btn').addEventListener('click', (e) => { e.preventDefault(); window.open(calUrl, '_blank'); });
 
     /* ==================================
        CANVAS PARTICLES
@@ -562,11 +602,13 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         this.speedX = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.5 + 0.1;
       }
       update() { this.y += this.speedY; this.x += this.speedX; if (this.y < 0) { this.y = canvas.height; this.x = Math.random() * canvas.width; } }
-      draw() { ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      draw() { ctx.fillStyle = \`rgba(212, 175, 55, \${this.opacity})\`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
     for (let i = 0; i < 80; i++) particles.push(new Particle());
     function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
     animate();
   </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('index.html', html);
