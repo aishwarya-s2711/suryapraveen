@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R. Praveenkumar & C. Suryaprabha – Ultra Luxury Wedding</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
-  
-  <style>
+const fs = require('fs');
+
+const css = `
 /* ============================
    ULTRA-PREMIUM LUXURY THEME
 ============================ */
@@ -188,17 +179,8 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .vinyl-record.spinning { animation: spin 3s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 .music-controls { display: flex; align-items: center; gap: 1rem; }
-#vol-slider {
-  -webkit-appearance: none; width: 60px; background: transparent; margin: 0;
-}
-#vol-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; height: 10px; width: 10px; border-radius: 50%;
-  background: var(--gold); cursor: pointer; margin-top: -4px;
-}
-#vol-slider::-webkit-slider-runnable-track {
-  width: 100%; height: 2px; cursor: pointer; background: rgba(212,175,55,0.3);
-}
-#vol-slider:focus { outline: none; }
+.music-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 1rem; }
+.music-btn:hover { color: #fff; }
 
 @media (max-width: 768px) {
   .section-pad { padding: 8rem 1.5rem; }
@@ -210,7 +192,20 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
   #music-widget { bottom: 1.5rem; right: 1.5rem; padding: 0.5rem; }
   .music-controls { display: none; } /* Hide volume on mobile to save space */
 }
-</style>
+`;
+
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R. Praveenkumar & C. Suryaprabha – Ultra Luxury Wedding</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>${css}</style>
 </head>
 <body class="locked">
 
@@ -260,8 +255,9 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
   <div id="music-widget">
     <div class="vinyl-record" id="vinyl-btn"></div>
     <div class="music-controls">
+      <button class="music-btn" id="vol-down">-</button>
       <span class="tracking-ultra" style="font-size:0.5rem; color:#888;">Vol</span>
-      <input type="range" id="vol-slider" min="0" max="100" value="60">
+      <button class="music-btn" id="vol-up">+</button>
     </div>
   </div>
 
@@ -380,10 +376,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     let ytPlayer;
     let isYtReady = false;
     let playing = false;
-    let savedVol = localStorage.getItem('ytVolume');
-    let savedPlaying = localStorage.getItem('ytPlaying');
-    let currentVol = savedVol !== null ? parseInt(savedVol) : 60;
-    let fadeInterval;
+    let currentVol = 60;
     
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -418,7 +411,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       if(!card.classList.contains('open')) {
         const x = (window.innerWidth / 2 - e.pageX) / 40;
         const y = (window.innerHeight / 2 - e.pageY) / 40;
-        card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        card.style.transform = \`rotateY(\${x}deg) rotateX(\${y}deg)\`;
       }
     });
 
@@ -441,7 +434,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
           document.body.appendChild(p);
           
           setTimeout(() => {
-            p.style.transform = `translateY(110vh) rotate(${Math.random() * 720}deg) translateX(${(Math.random()-0.5)*200}px)`;
+            p.style.transform = \`translateY(110vh) rotate(\${Math.random() * 720}deg) translateX(\${(Math.random()-0.5)*200}px)\`;
           }, 50);
           setTimeout(() => p.remove(), 8000);
         }, i * 150);
@@ -457,15 +450,10 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
       // Play Audio
       if (isYtReady && ytPlayer && ytPlayer.playVideo) {
-        if (savedPlaying !== 'false') {
-          ytPlayer.setVolume(0);
-          ytPlayer.playVideo();
-          playing = true;
-          vinylBtn.classList.add('spinning');
-          fadeAudio(currentVol, 2500);
-        } else {
-          ytPlayer.setVolume(currentVol);
-        }
+        ytPlayer.setVolume(currentVol);
+        ytPlayer.playVideo();
+        playing = true;
+        vinylBtn.classList.add('spinning');
       }
     });
 
@@ -474,52 +462,17 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     ================================== */
     vinylBtn.addEventListener('click', () => {
       if (!isYtReady || !ytPlayer || !ytPlayer.playVideo) return;
-      if (playing) {
-        vinylBtn.classList.remove('spinning');
-        fadeAudio(0, 1500, () => ytPlayer.pauseVideo());
-        playing = false;
-        localStorage.setItem('ytPlaying', 'false');
-      } else {
-        ytPlayer.setVolume(0);
-        ytPlayer.playVideo();
-        vinylBtn.classList.add('spinning');
-        fadeAudio(currentVol, 2500);
-        playing = true;
-        localStorage.setItem('ytPlaying', 'true');
-      }
+      if (playing) { ytPlayer.pauseVideo(); vinylBtn.classList.remove('spinning'); } 
+      else { ytPlayer.playVideo(); vinylBtn.classList.add('spinning'); }
+      playing = !playing;
     });
 
-    const volSlider = document.getElementById('vol-slider');
-    if (volSlider) volSlider.value = currentVol;
-    volSlider.addEventListener('input', (e) => {
-      currentVol = parseInt(e.target.value);
-      localStorage.setItem('ytVolume', currentVol);
-      if (isYtReady && ytPlayer && playing) {
-        clearInterval(fadeInterval);
-        ytPlayer.setVolume(currentVol);
-      }
+    document.getElementById('vol-up').addEventListener('click', () => {
+      if (isYtReady && currentVol < 100) { currentVol += 10; ytPlayer.setVolume(currentVol); }
     });
-
-    function fadeAudio(targetVolume, durationMs = 2000, onComplete = null) {
-      if (!ytPlayer || !ytPlayer.getVolume) return;
-      clearInterval(fadeInterval);
-      const startVolume = ytPlayer.getVolume();
-      const diff = targetVolume - startVolume;
-      const steps = 20;
-      const stepTime = durationMs / steps;
-      let currentStep = 0;
-      
-      fadeInterval = setInterval(() => {
-        currentStep++;
-        let newVol = startVolume + (diff * (currentStep / steps));
-        ytPlayer.setVolume(newVol);
-        if (currentStep >= steps) {
-          clearInterval(fadeInterval);
-          ytPlayer.setVolume(targetVolume);
-          if (onComplete) onComplete();
-        }
-      }, stepTime);
-    }
+    document.getElementById('vol-down').addEventListener('click', () => {
+      if (isYtReady && currentVol > 0) { currentVol -= 10; ytPlayer.setVolume(currentVol); }
+    });
 
     /* ==================================
        COUNTDOWN TIMER LOGIC
@@ -592,7 +545,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         }
       }
       draw() {
-        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.fillStyle = \`rgba(212, 175, 55, \${this.opacity})\`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -609,4 +562,6 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     animate();
   </script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('index.html', html);
