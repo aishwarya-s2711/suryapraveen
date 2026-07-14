@@ -473,11 +473,11 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
         // Slow to medium autoscroll down
         let autoScrollInterval = setInterval(() => {
-          window.scrollBy(0, 2);
+          window.scrollBy(0, 3);
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
             clearInterval(autoScrollInterval);
           }
-        }, 7);
+        }, 9);
 
         // Stop autoscroll if user interacts
         const stopAutoScroll = () => clearInterval(autoScrollInterval);
