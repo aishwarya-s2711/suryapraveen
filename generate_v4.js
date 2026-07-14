@@ -325,7 +325,7 @@ const html = `<!DOCTYPE html>
             <circle cx="50" cy="20" r="3" fill="var(--gold)"/>
           </svg>
           
-          <h2 class="shimmer-text" style="font-size:2.5rem; margin-bottom: 4rem;">The Grand Reception</h2>
+          <h2 class="shimmer-text" style="font-size:2.5rem; margin-bottom: 4rem;">The Wedding Reception</h2>
           
           <div style="margin-bottom: 3rem;">
             <p class="tracking-ultra">Date & Time</p>
