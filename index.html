@@ -119,8 +119,15 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
   background: transparent; color: var(--gold); border: 1px solid var(--gold);
   padding: 1rem 3rem; font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.3em;
   text-transform: uppercase; cursor: pointer; transition: all 0.5s ease; position: relative; overflow: hidden;
+  z-index: 1;
+}
+.btn-luxury::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-25deg); transition: all 0.7s ease; z-index: -1;
 }
 .btn-luxury:hover { background: var(--gold); color: var(--bg-core); font-weight:bold; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.4); }
+.btn-luxury:hover::before { left: 200%; }
 
 .card-interior { background: var(--bg-core); z-index: 1; transform: rotateY(0deg); border: 2px solid var(--gold-dark); }
 
@@ -134,7 +141,8 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .hero-names { font-size: clamp(3rem, 7vw, 6rem); line-height: 1; margin: 2rem 0; text-shadow: 0 10px 40px rgba(212,175,55,0.2); }
 .glowing-heart { display: inline-block; font-size: 1.5rem; margin: 0 1.5rem; color: var(--gold); animation: heartbeat 2s infinite ease-in-out; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 20px var(--gold)); } }
-.hero-glass-desc { margin: 4rem auto; max-width: 550px; padding: 2.5rem; background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+@keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.hero-glass-desc { margin: 4rem auto; max-width: 550px; padding: 2.5rem; background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); animation: gentleFloat 8s ease-in-out infinite; }
 @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.4); transform: translateY(0); } 50% { box-shadow: 0 0 30px rgba(212,175,55,0.8); transform: translateY(-3px); } }
 #save-date-btn { animation: pulseGlow 3s infinite; }
 #save-date-btn:hover { animation: none; transform: translateY(-4px) scale(1.02); box-shadow: 0 15px 30px rgba(212,175,55,0.6); }
@@ -587,11 +595,18 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.5 + 0.5; this.speedY = Math.random() * -0.5 - 0.1;
+        this.size = Math.random() * 3 + 1; this.speedY = Math.random() * -0.5 - 0.1;
         this.speedX = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.5 + 0.1;
       }
       update() { this.y += this.speedY; this.x += this.speedX; if (this.y < 0) { this.y = canvas.height; this.x = Math.random() * canvas.width; } }
-      draw() { ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      draw() { 
+        const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+        gradient.addColorStop(0, `rgba(255, 250, 239, ${this.opacity})`);
+        gradient.addColorStop(0.5, `rgba(212, 175, 55, ${this.opacity * 0.8})`);
+        gradient.addColorStop(1, `rgba(212, 175, 55, 0)`);
+        ctx.fillStyle = gradient; 
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+      }
     }
     for (let i = 0; i < 80; i++) particles.push(new Particle());
     function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
