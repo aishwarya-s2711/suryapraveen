@@ -66,7 +66,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 
 /* LOADER */
 #loader {
-  position: fixed; inset: 0; z-index: 10000; background: var(--bg-core);
+  position: fixed; inset: 0; z-index: 10000; background: radial-gradient(circle at center, rgba(42,8,8,0.8) 0%, var(--bg-core) 100%);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   transition: opacity 1.5s ease;
 }
@@ -135,6 +135,9 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .glowing-heart { display: inline-block; font-size: 1.5rem; margin: 0 1.5rem; color: var(--gold); animation: heartbeat 2s infinite ease-in-out; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 20px var(--gold)); } }
 .hero-glass-desc { margin: 4rem auto; max-width: 550px; padding: 2.5rem; background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.4); transform: translateY(0); } 50% { box-shadow: 0 0 30px rgba(212,175,55,0.8); transform: translateY(-3px); } }
+#save-date-btn { animation: pulseGlow 3s infinite; }
+#save-date-btn:hover { animation: none; transform: translateY(-4px) scale(1.02); box-shadow: 0 15px 30px rgba(212,175,55,0.6); }
 
 /* COUNTDOWN */
 .countdown-grid { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 4rem; }
@@ -176,7 +179,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .gallery-item:hover .gallery-img { transform: scale(1.05); }
 
 /* THANK YOU */
-.signature-svg { width: 300px; margin: 4rem auto; stroke: var(--gold); stroke-width: 1; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 4s ease; }
+.signature-svg { width: 300px; margin: 4rem auto; stroke: var(--gold); stroke-width: 1.5; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; transition: stroke-dashoffset 4s ease; filter: drop-shadow(0 0 8px rgba(212,175,55,0.6)); }
 .in-view .signature-svg { stroke-dashoffset: 0; }
 
 /* REVEAL */
@@ -188,13 +191,16 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
   position: fixed; bottom: 3rem; right: 3rem; display: flex; align-items: center; gap: 1rem;
   background: rgba(10,6,4,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212,175,55,0.2);
   padding: 0.5rem 1.5rem 0.5rem 0.5rem; border-radius: 50px; z-index: 9000;
-  opacity: 0; pointer-events: none; transition: opacity 1s;
+  opacity: 0; pointer-events: none; transition: opacity 1s, transform 0.3s, box-shadow 0.3s;
 }
+#music-widget:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.8), 0 0 15px rgba(212,175,55,0.2); }
 #music-widget.show { opacity: 1; pointer-events: all; }
 .vinyl-record {
   width: 40px; height: 40px; background: #111; border-radius: 50%; border: 2px solid #333;
   display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
+.vinyl-record:hover { box-shadow: 0 0 15px var(--gold); }
 .vinyl-record::after { content:''; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
 .vinyl-record.spinning { animation: spin 3s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
