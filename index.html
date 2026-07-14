@@ -384,19 +384,23 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         </h2>
         <p class="tracking-ultra" style="margin-top:4rem;">With Love</p>
         
-        <div style="display: flex; align-items: center; justify-content: center; margin: 2rem auto; width: 100%; max-width: 500px;">
+        <div style="display: flex; align-items: center; justify-content: center; margin: 2rem auto; width: 100%; max-width: 600px;">
           <hr style="flex-grow: 1; border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--gold));">
-          <svg class="bow-svg" viewBox="0 0 100 60" style="width: 120px; margin: 0 1.5rem; filter: drop-shadow(0 5px 15px rgba(212,175,55,0.4)); animation: subtleFloat 4s ease-in-out infinite;">
-            <!-- Left loop -->
-            <path d="M 50,25 C 10,-5 -10,45 25,40 C 40,38 50,25 50,25" fill="var(--gold)" opacity="0.85"/>
-            <!-- Right loop -->
-            <path d="M 50,25 C 90,-5 110,45 75,40 C 60,38 50,25 50,25" fill="var(--gold)" opacity="0.85"/>
-            <!-- Left ribbon -->
-            <path d="M 45,28 C 30,45 20,55 15,60 C 25,58 35,50 45,35" fill="var(--gold-dark)"/>
-            <!-- Right ribbon -->
-            <path d="M 55,28 C 70,45 80,55 85,60 C 75,58 65,50 55,35" fill="var(--gold-dark)"/>
-            <!-- Center knot -->
-            <circle cx="50" cy="25" r="7" fill="var(--gold-light)"/>
+          <svg class="bow-svg" viewBox="0 0 120 70" style="width: 140px; margin: 0 2rem; filter: drop-shadow(0 5px 15px rgba(212,175,55,0.4)); animation: subtleFloat 4s ease-in-out infinite;">
+            <!-- Left Loop -->
+            <path d="M60 30 C30 10 10 30 25 45 C40 55 55 40 60 30" fill="none" stroke="var(--gold)" stroke-width="2"/>
+            <path d="M60 30 C40 20 25 35 35 42 C45 48 55 35 60 30" fill="var(--gold-light)" opacity="0.5"/>
+            <!-- Right Loop -->
+            <path d="M60 30 C90 10 110 30 95 45 C80 55 65 40 60 30" fill="none" stroke="var(--gold)" stroke-width="2"/>
+            <path d="M60 30 C80 20 95 35 85 42 C75 48 65 35 60 30" fill="var(--gold-light)" opacity="0.5"/>
+            <!-- Left Tail -->
+            <path d="M55 35 C40 50 30 70 20 65 C35 55 45 45 60 40" fill="var(--gold-dark)" opacity="0.8"/>
+            <path d="M55 35 C40 50 30 70 20 65" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+            <!-- Right Tail -->
+            <path d="M65 35 C80 50 90 70 100 65 C85 55 75 45 60 40" fill="var(--gold-dark)" opacity="0.8"/>
+            <path d="M65 35 C80 50 90 70 100 65" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+            <!-- Knot -->
+            <circle cx="60" cy="32" r="6" fill="var(--gold-dark)" stroke="var(--gold-light)" stroke-width="2"/>
           </svg>
           <hr style="flex-grow: 1; border: none; height: 1px; background: linear-gradient(270deg, transparent, var(--gold));">
         </div>
