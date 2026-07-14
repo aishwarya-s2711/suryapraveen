@@ -120,11 +120,11 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 
 /* SECTIONS */
 main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; }
-.section-pad { padding: 6rem 2rem; position: relative; display: flex; flex-direction: column; align-items: center; }
+.section-pad { padding: 3rem 2rem; position: relative; display: flex; flex-direction: column; align-items: center; }
 .container { max-width: 1000px; margin: 0 auto; text-align: center; }
 
 /* HERO */
-#hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top:0; }
+#hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top:2rem; padding-bottom: 2rem; }
 .hero-names { font-size: clamp(3rem, 7vw, 6rem); line-height: 1; margin: 2rem 0; text-shadow: 0 10px 40px rgba(212,175,55,0.2); }
 .glowing-heart { display: inline-block; font-size: 1.5rem; margin: 0 1.5rem; color: var(--gold); animation: heartbeat 2s infinite ease-in-out; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 20px var(--gold)); } }
@@ -200,7 +200,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .in-view .kolam-svg { stroke-dashoffset: 0; }
 
 @media (max-width: 768px) {
-  .section-pad { padding: 4rem 1.5rem; }
+  .section-pad { padding: 2rem 1.5rem; }
   .hero-names { font-size: 2.5rem; }
   .glowing-heart { display: block; margin: 1rem 0; }
   .cd-box { width: 100px; padding: 1.5rem 1rem; }
