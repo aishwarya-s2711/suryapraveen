@@ -206,34 +206,11 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .kolam-svg { stroke: var(--ivory); stroke-width: 0.5; fill: none; opacity: 0.3; stroke-dasharray: 500; stroke-dashoffset: 500; transition: stroke-dashoffset 5s ease; }
 .in-view .kolam-svg { stroke-dashoffset: 0; }
 
-/* MAGICAL CELESTIAL ORB */
-.celestial-orb {
-  position: relative; width: 120px; height: 120px; margin: 0 auto 3rem auto;
-  perspective: 1200px; transform-style: preserve-3d;
-}
-.celestial-orb .orb-ring {
-  position: absolute; inset: 0; border: 1px solid rgba(212,175,55,0.4); border-radius: 50%;
-  box-shadow: 0 0 15px rgba(212,175,55,0.1), inset 0 0 15px rgba(212,175,55,0.1);
-}
-.celestial-orb .orb-ring:nth-child(1) { 
-  border-top: 2px solid var(--gold-light); animation: spinRing1 12s linear infinite; 
-}
-.celestial-orb .orb-ring:nth-child(2) { 
-  border-right: 2px solid var(--gold); animation: spinRing2 16s linear infinite reverse; 
-}
-.celestial-orb .orb-ring:nth-child(3) { 
-  border-bottom: 2px solid var(--ivory); animation: spinRing3 20s linear infinite; 
-}
-.orb-core {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 15px; height: 15px; background: radial-gradient(circle, #fff, var(--gold));
-  border-radius: 50%; animation: pulseCore 3s ease-in-out infinite;
-}
-
-@keyframes spinRing1 { 0% { transform: rotateX(70deg) rotateZ(0deg); } 100% { transform: rotateX(70deg) rotateZ(360deg); } }
-@keyframes spinRing2 { 0% { transform: rotateY(70deg) rotateX(0deg); } 100% { transform: rotateY(70deg) rotateX(360deg); } }
-@keyframes spinRing3 { 0% { transform: rotateZ(70deg) rotateY(0deg); } 100% { transform: rotateZ(70deg) rotateY(360deg); } }
-@keyframes pulseCore { 0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold-dark); } 50% { transform: translate(-50%, -50%) scale(1.5); box-shadow: 0 0 40px #fff, 0 0 80px var(--gold); } }
+/* INNOVATIVE SOUTH INDIAN WELCOME */
+.innovative-welcome { position: relative; display: inline-flex; justify-content: center; align-items: center; margin-bottom: 2rem; width: 200px; height: 200px; filter: drop-shadow(0 10px 20px rgba(212,175,55,0.3)); }
+.kolam-ring { position: absolute; width: 100%; height: 100%; animation: spin 24s linear infinite; }
+.welcome-dots { position: absolute; width: 100%; height: 100%; animation: spin 16s linear infinite reverse; }
+.kalasam-center { position: absolute; width: 90px; height: 90px; animation: subtleFloat 4s ease-in-out infinite; z-index: 2; }
 
 @media (max-width: 768px) {
   .section-pad { padding: 2rem 1.5rem; }
@@ -378,11 +355,45 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     <!-- THANK YOU -->
     <section id="thank-you" class="section-pad">
       <div class="container reveal">
-        <div class="celestial-orb">
-          <div class="orb-ring"></div>
-          <div class="orb-ring"></div>
-          <div class="orb-ring"></div>
-          <div class="orb-core"></div>
+        <div class="innovative-welcome">
+          <!-- Outer rotating Kolam / Mandala -->
+          <svg class="kolam-ring" viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--gold-light)" />
+                <stop offset="50%" stop-color="var(--gold)" />
+                <stop offset="100%" stop-color="var(--gold-dark)" />
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="90" fill="none" stroke="url(#gold-grad)" stroke-width="2" stroke-dasharray="8 6" />
+            <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="1" />
+            <!-- 8-petal lotus kolam -->
+            <path d="M100,20 Q120,60 170,30 Q140,80 180,100 Q140,120 170,170 Q120,140 100,180 Q80,140 30,170 Q60,120 20,100 Q60,80 30,30 Q80,60 100,20 Z" fill="none" stroke="var(--gold)" stroke-width="1.5" />
+            <circle cx="100" cy="100" r="10" fill="var(--gold)" opacity="0.2"/>
+          </svg>
+          <!-- Reverse rotating dots -->
+          <svg class="welcome-dots" viewBox="0 0 200 200">
+            <circle cx="100" cy="35" r="3" fill="var(--gold-light)"/>
+            <circle cx="100" cy="165" r="3" fill="var(--gold-light)"/>
+            <circle cx="35" cy="100" r="3" fill="var(--gold-light)"/>
+            <circle cx="165" cy="100" r="3" fill="var(--gold-light)"/>
+          </svg>
+          <!-- Center Kalasam (Purna Kumbham) -->
+          <svg class="kalasam-center" viewBox="0 0 100 100">
+            <!-- Coconut -->
+            <ellipse cx="50" cy="35" rx="14" ry="18" fill="#4a2e15" stroke="var(--gold)" stroke-width="1"/>
+            <path d="M46,22 L46,20 M50,22 L50,18 M54,22 L54,20" stroke="#7b4e23" stroke-width="1" fill="none"/>
+            <!-- Mango Leaves -->
+            <path d="M48,45 C20,35 15,60 40,50 Z" fill="#2d5a27" stroke="var(--gold)" stroke-width="0.5"/>
+            <path d="M52,45 C80,35 85,60 60,50 Z" fill="#2d5a27" stroke="var(--gold)" stroke-width="0.5"/>
+            <path d="M45,45 C10,25 25,65 35,50 Z" fill="#3a7033" stroke="var(--gold)" stroke-width="0.5"/>
+            <path d="M55,45 C90,25 75,65 65,50 Z" fill="#3a7033" stroke="var(--gold)" stroke-width="0.5"/>
+            <!-- Kalasam Pot -->
+            <path d="M35,65 C20,95 80,95 65,65 C70,55 30,55 35,65 Z" fill="url(#gold-grad)"/>
+            <rect x="42" y="52" width="16" height="5" fill="var(--maroon)" />
+            <path d="M35,65 Q50,75 65,65" fill="none" stroke="var(--maroon)" stroke-width="2"/>
+            <path d="M40,75 Q50,85 60,75" fill="none" stroke="var(--maroon)" stroke-width="2"/>
+          </svg>
         </div>
         
         <h2 style="font-size:2.5rem; line-height:1.5; color:var(--ivory);">
