@@ -130,17 +130,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
   background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.1); backdrop-filter: blur(10px);
 }
 
-/* COUNTDOWN SECTION */
-.countdown-grid {
-  display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 4rem;
-}
-.cd-box {
-  background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.2);
-  padding: 2.5rem 2rem; width: 140px; text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
-}
-.cd-num { font-family: var(--font-serif); font-size: 3rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-.cd-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+
 
 /* EVENT & CALENDAR */
 .premium-card {
@@ -276,30 +266,7 @@ const html = `<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- COUNTDOWN -->
-    <section id="countdown" class="section-pad">
-      <div class="container reveal">
-        <h2 style="font-size: 2rem; margin-bottom: 2rem; color:var(--gold);">The Wait Is Almost Over</h2>
-        <div class="countdown-grid">
-          <div class="cd-box">
-            <div class="cd-num" id="cd-days">00</div>
-            <div class="cd-label">Days</div>
-          </div>
-          <div class="cd-box">
-            <div class="cd-num" id="cd-hours">00</div>
-            <div class="cd-label">Hours</div>
-          </div>
-          <div class="cd-box">
-            <div class="cd-num" id="cd-mins">00</div>
-            <div class="cd-label">Minutes</div>
-          </div>
-          <div class="cd-box">
-            <div class="cd-num" id="cd-secs">00</div>
-            <div class="cd-label">Seconds</div>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- EVENT & LOCATION -->
     <section id="event" class="section-pad">
@@ -474,25 +441,7 @@ const html = `<!DOCTYPE html>
       if (isYtReady && currentVol > 0) { currentVol -= 10; ytPlayer.setVolume(currentVol); }
     });
 
-    /* ==================================
-       COUNTDOWN TIMER LOGIC
-    ================================== */
-    const targetDate = new Date("Aug 22, 2026 18:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const dist = targetDate - now;
-      if (dist < 0) return;
-      
-      const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-      const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((dist % (1000 * 60)) / 1000);
-      
-      document.getElementById("cd-days").innerText = d < 10 ? "0"+d : d;
-      document.getElementById("cd-hours").innerText = h < 10 ? "0"+h : h;
-      document.getElementById("cd-mins").innerText = m < 10 ? "0"+m : m;
-      document.getElementById("cd-secs").innerText = s < 10 ? "0"+s : s;
-    }, 1000);
+
 
     /* ==================================
        SCROLL REVEAL LOGIC

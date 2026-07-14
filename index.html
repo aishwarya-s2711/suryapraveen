@@ -136,11 +136,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 20px var(--gold)); } }
 .hero-glass-desc { margin: 4rem auto; max-width: 550px; padding: 2.5rem; background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
-/* COUNTDOWN */
-.countdown-grid { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 4rem; }
-.cd-box { background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(212,175,55,0.01)); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 2.5rem 2rem; width: 140px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
-.cd-num { font-family: var(--font-serif); font-size: 3rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
-.cd-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
+
 
 /* EVENT & CALENDAR */
 .premium-card {
@@ -298,18 +294,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
 
 
-    <!-- COUNTDOWN -->
-    <section id="countdown" class="section-pad">
-      <div class="container reveal">
-        <h2 class="shimmer-text" style="font-size: 2rem; margin-bottom: 2rem;">The Wait Is Almost Over</h2>
-        <div class="countdown-grid">
-          <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- EVENT & LOCATION -->
     <section id="event" class="section-pad">
@@ -550,18 +535,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       if (playing && !isMuted && isYtReady) ytPlayer.setVolume(currentVol);
     });
 
-    /* ==================================
-       COUNTDOWN TIMER
-    ================================== */
-    const targetDate = new Date("Aug 22, 2026 18:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime(); const dist = targetDate - now;
-      if (dist < 0) return;
-      document.getElementById("cd-days").innerText = String(Math.floor(dist / (1000 * 60 * 60 * 24))).padStart(2, '0');
-      document.getElementById("cd-hours").innerText = String(Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      document.getElementById("cd-mins").innerText = String(Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      document.getElementById("cd-secs").innerText = String(Math.floor((dist % (1000 * 60)) / 1000)).padStart(2, '0');
-    }, 1000);
+
 
     /* ==================================
        SCROLL REVEAL LOGIC
