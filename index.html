@@ -36,9 +36,15 @@ body {
 }
 body.locked { overflow: hidden; }
 
-::-webkit-scrollbar { width: 4px; }
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(42, 8, 8, 0.2) 0%, transparent 50%);
+}
+
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-core); }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
 
 h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: var(--ivory); }
 .text-gold { color: var(--gold); }
@@ -114,7 +120,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
   padding: 1rem 3rem; font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.3em;
   text-transform: uppercase; cursor: pointer; transition: all 0.5s ease; position: relative; overflow: hidden;
 }
-.btn-luxury:hover { background: var(--gold); color: var(--bg-core); font-weight:bold; transform: translateY(-2px); }
+.btn-luxury:hover { background: var(--gold); color: var(--bg-core); font-weight:bold; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.4); }
 
 .card-interior { background: var(--bg-core); z-index: 1; transform: rotateY(0deg); border: 2px solid var(--gold-dark); }
 
@@ -132,14 +138,14 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
 /* COUNTDOWN */
 .countdown-grid { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 4rem; }
-.cd-box { background: rgba(212,175,55,0.03); border: 1px solid rgba(212,175,55,0.2); padding: 2.5rem 2rem; width: 140px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+.cd-box { background: linear-gradient(135deg, rgba(212,175,55,0.05), rgba(212,175,55,0.01)); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 12px; padding: 2.5rem 2rem; width: 140px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
 .cd-num { font-family: var(--font-serif); font-size: 3rem; color: var(--gold); line-height: 1; margin-bottom: 0.5rem; }
 .cd-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #888; }
 
 /* EVENT & CALENDAR */
 .premium-card {
   background: rgba(15,10,7,0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(212,175,55,0.3); padding: 5rem 3rem; max-width: 800px; margin: 0 auto; position: relative;
+  border: 1px solid rgba(212,175,55,0.3); border-top: 1px solid rgba(212,175,55,0.5); border-radius: 16px; padding: 5rem 3rem; max-width: 800px; margin: 0 auto; position: relative;
   box-shadow: 0 30px 60px rgba(0,0,0,0.8);
 }
 .floral-arch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 150px; opacity: 0.5; }
