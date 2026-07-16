@@ -712,6 +712,15 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       card.classList.add('open');
       document.body.classList.add('locked');
       
+      // Start audio immediately
+      if (isYtReady && !playing) {
+          if (isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
+          else { fadeAudio(currentVol, 2000); }
+          playing = true;
+          vinylBtn.classList.add('spinning');
+          playPauseBtn.innerText = '⏸';
+      }
+      
       // 2. Emoji Flower Shower
       const showerContainer = document.createElement('div');
       showerContainer.style.position = 'fixed';
@@ -776,7 +785,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         // Start Autoscroll
         let autoScrollReq;
         const doAutoScroll = () => {
-          window.scrollBy({ top: 0.4, behavior: 'instant' });
+          window.scrollBy({ top: 0.2, behavior: 'instant' });
           if ((window.innerHeight + window.scrollY) < document.body.offsetHeight - 2) {
             autoScrollReq = requestAnimationFrame(doAutoScroll);
           }
@@ -787,15 +796,8 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         window.addEventListener('touchstart', stopAutoScroll, {once: true});
         window.addEventListener('mousedown', stopAutoScroll, {once: true});
         
-        // Audio
-        if (isYtReady) {
-          if (isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
-          else { fadeAudio(currentVol, 2000); }
-          playing = true;
-          vinylBtn.classList.add('spinning');
-          playPauseBtn.innerText = '⏸';
-        }
-      }, 5000);
+        // Audio started earlier
+      }, 4000);
     });
 
     /* ==================================
