@@ -333,58 +333,46 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         <div style="position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; background-image: radial-gradient(rgba(212,175,55,0.4) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.1; animation: float 20s linear infinite;"></div>
         
         <!-- Glass card container -->
-        <div style="position: relative; z-index: 1; width: 85%; height: 85%; background: rgba(14,34,61,0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(212,175,55,0.3); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: glowPulse 5s infinite alternate;">
+        <div style="position: relative; z-index: 1; width: 85%; height: 85%; background: rgba(14,34,61,0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(212,175,55,0.3); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 3rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; animation: glowPulse 5s infinite alternate;">
           
           <!-- Premium Title -->
-          <h4 style="font-family: var(--font-sans); font-size: 0.8rem; color: var(--gold); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 1.5rem; white-space: nowrap;">
-            ✦ OUR LOVE STORY ✦
+          <h4 style="font-family: var(--font-sans); font-size: 0.75rem; color: var(--gold); letter-spacing: 12px; text-transform: uppercase; margin-bottom: 2rem; white-space: nowrap;">
+            OUR LOVE STORY
           </h4>
 
-          <!-- Glowing ornament -->
-          <div style="position: relative; margin-bottom: 1.5rem;">
+          <!-- Glowing ornament (Celestial Mandala) -->
+          <div style="position: relative; margin-bottom: 2.5rem; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
             <!-- Glow -->
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 60%); filter: blur(15px); z-index: -1;"></div>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 60%); filter: blur(20px); z-index: -1;"></div>
             
-            <div style="color: var(--gold); font-size: 1.2rem; letter-spacing: 4px; animation: spin 25s linear infinite;">
-              ✦ ❈ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ❈ ✦
-              <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-                <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
-              </svg>
-            </div>
-          </div>
-
-          <!-- Top Separator -->
-          <div style="display: flex; align-items: center; justify-content: center; width: 80%; margin-bottom: 2rem;">
-            <div style="flex-grow: 1; height: 1px; background: rgba(212,175,55,0.4);"></div>
-            <span style="color: var(--gold); font-size: 0.8rem; margin: 0 1rem;">✦</span>
-            <div style="flex-grow: 1; height: 1px; background: rgba(212,175,55,0.4);"></div>
+            <svg style="animation: spin 30s linear infinite;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="2 4"/>
+              <path d="M50,15 L55,45 L85,50 L55,55 L50,85 L45,55 L15,50 L45,45 Z" fill="none" stroke="var(--gold)" stroke-width="1"/>
+              <circle cx="50" cy="50" r="3" fill="var(--gold)"/>
+            </svg>
           </div>
 
           <!-- Quote -->
-          <p class="interior-quote" style="font-family: var(--font-italic); font-style: italic; font-size: 1.3rem; color: var(--ivory); line-height: 1.8; text-align: center; max-width: 90%; margin-bottom: 2rem; animation: slideUpFade 1.5s ease-out forwards;">
-            "Every great love story begins with a single moment.<br>Join us as we celebrate the beginning of ours and create memories that will last a lifetime."
+          <p class="interior-quote" style="font-family: var(--font-italic); font-style: italic; font-size: 1.4rem; color: var(--ivory); line-height: 1.9; text-align: center; max-width: 90%; margin-bottom: 3rem; animation: slideUpFade 1.5s ease-out forwards;">
+            "Your presence will make<br>
+            our celebration truly complete.<br><br>
+            We look forward<br>
+            to sharing this<br>
+            unforgettable day<br>
+            with you."
           </p>
 
-          <!-- Bottom Separator -->
-          <div style="display: flex; align-items: center; justify-content: center; width: 80%; margin-bottom: 2rem;">
+          <!-- Final Separator -->
+          <div style="display: flex; align-items: center; justify-content: center; width: 70%;">
             <div style="flex-grow: 1; height: 1px; background: rgba(212,175,55,0.4);"></div>
             <span style="color: var(--gold); font-size: 0.8rem; margin: 0 1rem;">✦</span>
             <div style="flex-grow: 1; height: 1px; background: rgba(212,175,55,0.4);"></div>
-          </div>
-
-          <!-- Signature -->
-          <div style="text-align: center;">
-            <h5 style="font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 0.8rem;">WITH LOVE</h5>
-            <p style="font-family: var(--font-serif); font-size: 1.2rem; color: var(--ivory); letter-spacing: 0.05em; line-height: 1.4;">
-              Praveenkumar<br>
-              <span style="font-size: 0.8rem; color: var(--gold);">&amp;</span><br>
-              Suryaprabha
-            </p>
           </div>
           
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- MUSIC WIDGET -->
