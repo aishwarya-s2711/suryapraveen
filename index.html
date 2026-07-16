@@ -712,7 +712,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       card.classList.add('open');
       document.body.classList.add('locked');
       
-      // 2. Realistic Flower & Leaf Shower
+      // 2. Emoji Flower Shower
       const showerContainer = document.createElement('div');
       showerContainer.style.position = 'fixed';
       showerContainer.style.inset = '0';
@@ -721,50 +721,50 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       showerContainer.style.overflow = 'hidden';
       document.body.appendChild(showerContainer);
       
-      // Reliable public domain / free-to-use transparent PNGs for petals and leaves
-      const images = [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Rose_petal_transparent.png/320px-Rose_petal_transparent.png',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Leaf_transparent_background.png/320px-Leaf_transparent_background.png'
-      ];
+      const emojis = ['🌸', '🌼', '🍃', '🍂', '🏵', '🌺'];
+      const numEmojis = Math.floor(Math.random() * 16) + 25; // 25 to 40 emojis
       
-      // Generate 100 items (80-120 range requested)
-      for(let i=0; i<100; i++) {
-        const img = document.createElement('img');
-        img.src = images[Math.floor(Math.random() * images.length)];
+      for(let i=0; i<numEmojis; i++) {
+        const span = document.createElement('span');
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         
-        // Randomize initial properties
-        const size = Math.random() * 20 + 20; // 20px to 40px
-        img.style.position = 'absolute';
-        img.style.left = (Math.random() * 100) + 'vw';
-        img.style.top = '-10vh';
-        img.style.width = size + 'px';
-        img.style.height = 'auto';
-        img.style.opacity = (Math.random() * 0.4 + 0.6).toString();
+        const size = Math.random() * 1.5 + 1; // 1rem to 2.5rem
+        span.style.position = 'absolute';
+        span.style.left = (Math.random() * 100) + 'vw';
+        span.style.top = '-10vh';
+        span.style.fontSize = size + 'rem';
+        span.style.display = 'inline-block';
+        span.style.opacity = (Math.random() * 0.5 + 0.5).toString();
         
-        showerContainer.appendChild(img);
+        showerContainer.appendChild(span);
         
-        // Animation variables
-        const duration = Math.random() * 1000 + 4000; // 4 to 5 seconds
-        const delay = Math.random() * 500; // stagger start times slightly
-        const endX = (Math.random() - 0.5) * 300; // side to side movement
-        const endRotation = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 720 + 360);
+        const duration = Math.random() * 2000 + 3000; // 3 to 5 seconds to fall
+        const delay = Math.random() * 1500; // stagger start times slightly
+        const endX = (Math.random() - 0.5) * 200; // left-right drift
+        const endRotation = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 360 + 180);
         
-        // Web Animations API for smooth 60FPS GPU accelerated transforms
-        const animation = img.animate([
+        const animation = span.animate([
           { transform: `translate3d(0, 0, 0) rotate(0deg)` },
           { transform: `translate3d(${endX/2}px, 60vh, 0) rotate(${endRotation/2}deg)`, offset: 0.5 },
           { transform: `translate3d(${endX}px, 110vh, 0) rotate(${endRotation}deg)` }
         ], {
           duration: duration,
           delay: delay,
-          easing: 'ease-in',
+          easing: 'linear',
           fill: 'forwards'
         });
         
-        animation.onfinish = () => img.remove();
+        animation.onfinish = () => span.remove();
       }
       
-      // 3. After 5 seconds, reveal the main invitation
+      // Stop automatically after 4.5 seconds (removing container)
+      setTimeout(() => {
+        if(showerContainer && showerContainer.parentNode) {
+            showerContainer.remove();
+        }
+      }, 4500);
+      
+      // Reveal the main invitation (wait time = 10s as per previous instructions)
       setTimeout(() => {
         showerContainer.remove();
         overlay.classList.add('fade-out');
