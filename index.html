@@ -302,7 +302,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
         <p style="font-family: var(--font-serif); font-style: italic; color: var(--bg-deep); font-size: 1.3rem; margin-bottom: 2.5rem;">Cordially Invites You</p>
         
-        <button id="open-btn" style="background:var(--bg-deep); color:var(--gold); border:1px solid var(--gold); border-radius:50px; padding:0.9rem 2.2rem 0.6rem; font-family:var(--font-sans); font-size:0.65rem; font-weight:500; letter-spacing:0.3em; text-transform:uppercase; cursor:pointer; box-shadow:0 15px 35px rgba(0,0,0,0.3); transition:all 0.3s ease; position:relative; z-index:10; display:flex; flex-direction:column; align-items:center; gap:0.4rem; margin:0 auto;" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)';">
+        <button id="open-btn" style="background:var(--bg-deep); color:var(--gold); border:1px solid var(--gold); border-radius:50px; padding:0.9rem 2.2rem 0.6rem; font-family:var(--font-sans); font-size:0.65rem; font-weight:500; letter-spacing:0.3em; text-transform:uppercase; cursor:pointer; box-shadow:0 15px 35px rgba(0,0,0,0.3); transition:all 0.3s ease; position:relative; z-index:10; display:flex; flex-direction:column; align-items:center; gap:0.4rem; margin:0 auto;" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.5), 0 0 15px rgba(212,175,55,0.3)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3), 0 0 0px rgba(212,175,55,0)';">
           <span>OPEN INVITATION</span>
           <svg width="50" height="10" viewBox="0 0 60 12" xmlns="http://www.w3.org/2000/svg">
             <line x1="12" y1="6" x2="25" y2="6" stroke="var(--gold)" stroke-width="1.2"/>
@@ -393,25 +393,28 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
 
     <!-- THANK YOU -->
-    <section id="thank-you" class="section-pad">
+    <section id="thank-you" class="section-pad" style="padding-top: 3rem;">
       <div class="container reveal" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         
-        <!-- Cinematic glow behind ornament -->
-        <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); filter: blur(80px); z-index: 0; pointer-events: none;"></div>
-
         <!-- Floral Emblem / Crest with slow rotation -->
-        <div style="position: relative; z-index: 1; margin-bottom: 3rem; width: 120px; height: 120px; animation: spin 20s linear infinite;">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50,10 C60,30 80,40 90,50 C80,60 60,70 50,90 C40,70 20,60 10,50 C20,40 40,30 50,10 Z" fill="none" stroke="var(--gold)" stroke-width="1"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
-            <circle cx="50" cy="50" r="15" fill="none" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="2 2"/>
-            <circle cx="50" cy="50" r="5" fill="var(--gold)"/>
-            <path d="M50,25 L50,15 M75,50 L85,50 M50,75 L50,85 M25,50 L15,50" stroke="var(--gold)" stroke-width="1"/>
+        <div style="position: relative; z-index: 1; margin-bottom: 2rem; margin-top: -2rem; width: 140px; height: 140px; animation: spin 25s linear infinite; display:flex; align-items:center; justify-content:center;">
+          <!-- Soft gold glow behind the ornament directly inside its container -->
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; background: radial-gradient(circle, rgba(212,175,55,0.10) 0%, transparent 60%); filter: blur(50px); z-index: -1; pointer-events: none;"></div>
+          
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Interlocking elegant rings / Lotus Mandala -->
+            <path d="M100,10 C120,40 160,40 190,50 C160,60 120,60 100,90 C80,60 40,60 10,50 C40,40 80,40 100,10 Z" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+            <circle cx="80" cy="100" r="45" fill="none" stroke="var(--gold)" stroke-width="1.2" />
+            <circle cx="120" cy="100" r="45" fill="none" stroke="var(--gold)" stroke-width="1.2" />
+            <circle cx="100" cy="100" r="75" fill="none" stroke="var(--gold)" stroke-width="0.5" />
+            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="2 4"/>
+            <!-- Center diamond -->
+            <polygon points="100,75 115,100 100,125 85,100" fill="var(--gold)" opacity="0.8"/>
           </svg>
         </div>
 
         <!-- Glassmorphism Quote Section -->
-        <div style="position: relative; z-index: 1; background: rgba(14,34,61,0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 5rem 4rem; max-width: 700px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+        <div style="position: relative; z-index: 1; background: linear-gradient(135deg, rgba(14,34,61,0.35) 0%, rgba(5,13,26,0.6) 100%); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(212,175,55,0.4); border-radius: 32px; padding: 5rem 4rem; max-width: 700px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(212,175,55,0.05);">
           
           <div style="color:var(--gold); font-size:1rem; letter-spacing:8px; margin-bottom:2rem;">✦ ✦ ✦</div>
           
@@ -650,11 +653,11 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1; // Different sizes
-        this.speedY = Math.random() * -0.2 - 0.05; // Slower speed
-        this.speedX = (Math.random() - 0.5) * 0.1;
-        this.opacity = Math.random() * 0.6 + 0.1; // Different opacities
-        this.blur = Math.random() * 3; // Blur some particles
+        this.size = Math.random() * 3.5 + 1.5; 
+        this.speedY = Math.random() * -0.15 - 0.05; 
+        this.speedX = (Math.random() - 0.5) * 0.08;
+        this.opacity = Math.random() * 0.5 + 0.1; 
+        this.blur = Math.random() * 4; 
       }
       update() { 
         this.y += this.speedY; this.x += this.speedX; 
@@ -665,10 +668,10 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         ctx.shadowBlur = this.blur;
         ctx.shadowColor = `rgba(212, 175, 55, ${this.opacity})`;
         ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
-        ctx.shadowBlur = 0; // reset for next drawing
+        ctx.shadowBlur = 0; 
       }
     }
-    for (let i = 0; i < 25; i++) particles.push(new Particle()); // Only 25 particles
+    for (let i = 0; i < 15; i++) particles.push(new Particle()); // Only 15 particles
     function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
     animate();
   </script>
