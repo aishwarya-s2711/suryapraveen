@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
   
   <style>
 /* ============================
@@ -25,6 +25,7 @@
   --font-serif: 'Cinzel', serif;
   --font-sans: 'Poppins', sans-serif;
   --radius: 28px;
+  --font-italic: 'Cormorant Garamond', serif;
   
   --trans-slow: all 2s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
@@ -39,8 +40,12 @@ body.locked { overflow: hidden; }
 
 body::after {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
-              radial-gradient(circle at 100% 100%, rgba(14, 34, 61, 0.5) 0%, transparent 60%);
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 60%),
+    radial-gradient(circle at center, rgba(14,34,61,0.8) 0%, rgba(5,13,26,1) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: screen, normal, overlay;
+  opacity: 0.9;
 }
 
 ::-webkit-scrollbar { width: 6px; }
@@ -182,7 +187,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 /* Bow added inline */
 
 /* REVEAL */
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 2s var(--trans-slow), transform 2s var(--trans-slow); }
+.reveal { opacity: 0; transform: translateY(15px); transition: opacity 1.2s ease-out, transform 1.2s ease-out; }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 
 /* MUSIC WIDGET */
@@ -389,39 +394,60 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
     <!-- THANK YOU -->
     <section id="thank-you" class="section-pad">
-      <div class="container reveal">
-        <div class="innovative-welcome">
-          <!-- Outer rotating Kolam / Mandala -->
-          <svg class="kolam-ring" viewBox="0 0 200 200">
-            <defs>
-              <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="var(--gold-light)" />
-                <stop offset="50%" stop-color="var(--gold)" />
-                <stop offset="100%" stop-color="var(--gold-dark)" />
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="100" r="90" fill="none" stroke="url(#gold-grad)" stroke-width="2" stroke-dasharray="8 6" />
-            <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="1" />
-            <!-- 8-petal lotus kolam -->
-            <path d="M100,20 Q120,60 170,30 Q140,80 180,100 Q140,120 170,170 Q120,140 100,180 Q80,140 30,170 Q60,120 20,100 Q60,80 30,30 Q80,60 100,20 Z" fill="none" stroke="var(--gold)" stroke-width="1.5" />
-            <circle cx="100" cy="100" r="10" fill="var(--gold)" opacity="0.2"/>
-          </svg>
-          <!-- Reverse rotating dots -->
-          <svg class="welcome-dots" viewBox="0 0 200 200">
-            <circle cx="100" cy="35" r="3" fill="var(--gold-light)"/>
-            <circle cx="100" cy="165" r="3" fill="var(--gold-light)"/>
-            <circle cx="35" cy="100" r="3" fill="var(--gold-light)"/>
-            <circle cx="165" cy="100" r="3" fill="var(--gold-light)"/>
-          </svg>
+      <div class="container reveal" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        
+        <!-- Cinematic glow behind ornament -->
+        <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); filter: blur(80px); z-index: 0; pointer-events: none;"></div>
+
+        <!-- Floral Emblem / Crest with slow rotation -->
+        <div style="position: relative; z-index: 1; margin-bottom: 3rem; width: 120px; height: 120px; animation: spin 20s linear infinite;">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50,10 C60,30 80,40 90,50 C80,60 60,70 50,90 C40,70 20,60 10,50 C20,40 40,30 50,10 Z" fill="none" stroke="var(--gold)" stroke-width="1"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="var(--gold)" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="15" fill="none" stroke="var(--gold)" stroke-width="0.5" stroke-dasharray="2 2"/>
+            <circle cx="50" cy="50" r="5" fill="var(--gold)"/>
+            <path d="M50,25 L50,15 M75,50 L85,50 M50,75 L50,85 M25,50 L15,50" stroke="var(--gold)" stroke-width="1"/>
           </svg>
         </div>
-        
-        <p style="font-family: var(--font-sans); font-size: 1.2rem; line-height: 2; color: var(--ivory); max-width: 800px; margin: 0 auto;">
-          "Your presence is the greatest gift we could receive. We would be honored to celebrate this beautiful evening with you."
-        </p>
-        <p class="tracking-ultra" style="margin-top:4rem; margin-bottom:1rem;">With Love</p>
-        <hr style="border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); width: 60%; max-width: 200px; margin: 0 auto;">
-        
+
+        <!-- Glassmorphism Quote Section -->
+        <div style="position: relative; z-index: 1; background: rgba(14,34,61,0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 5rem 4rem; max-width: 700px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+          
+          <div style="color:var(--gold); font-size:1rem; letter-spacing:8px; margin-bottom:2rem;">✦ ✦ ✦</div>
+          
+          <h3 style="font-family: var(--font-italic); font-style: italic; font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; color: var(--ivory); line-height: 1.3; margin-bottom: 1.5rem;">
+            Your Presence<br>is the Greatest Gift
+          </h3>
+          
+          <p style="font-family: var(--font-italic); font-style: italic; font-size: clamp(1.2rem, 3vw, 1.5rem); color: #ccc; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+            We would be honored to celebrate this beautiful evening with you.
+          </p>
+
+          <div style="color:var(--gold); font-size:1rem; letter-spacing:8px; margin-top:2rem;">✦ ✦ ✦</div>
+        </div>
+
+        <!-- Bottom Finish -->
+        <div style="margin-top: 6rem; text-align: center; position: relative; z-index: 1;">
+          <div style="display:flex; align-items:center; justify-content:center; width: 100%; max-width: 200px; margin: 0 auto 2rem;">
+            <div style="flex-grow:1; height:1px; background:rgba(212,175,55,0.5);"></div>
+          </div>
+          
+          <p style="font-family: var(--font-sans); font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem;">
+            We Look Forward<br>to Celebrating With You
+          </p>
+          
+          <div style="color:var(--gold); font-size:1rem; margin-bottom: 2rem;">✦</div>
+          
+          <p style="font-family: var(--font-serif); font-size: 1.5rem; color: var(--ivory); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.8;">
+            Praveenkumar<br>
+            <span style="font-size:1rem; color:var(--gold); margin: 0 0.5rem;">&amp;</span><br>
+            Suryaprabha
+          </p>
+
+          <div style="display:flex; align-items:center; justify-content:center; width: 100%; max-width: 200px; margin: 2rem auto 0;">
+            <div style="flex-grow:1; height:1px; background:rgba(212,175,55,0.5);"></div>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -624,13 +650,25 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.5 + 0.5; this.speedY = Math.random() * -0.5 - 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.5 + 0.1;
+        this.size = Math.random() * 3 + 1; // Different sizes
+        this.speedY = Math.random() * -0.2 - 0.05; // Slower speed
+        this.speedX = (Math.random() - 0.5) * 0.1;
+        this.opacity = Math.random() * 0.6 + 0.1; // Different opacities
+        this.blur = Math.random() * 3; // Blur some particles
       }
-      update() { this.y += this.speedY; this.x += this.speedX; if (this.y < 0) { this.y = canvas.height; this.x = Math.random() * canvas.width; } }
-      draw() { ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      update() { 
+        this.y += this.speedY; this.x += this.speedX; 
+        if (this.y < 0) { this.y = canvas.height; this.x = Math.random() * canvas.width; } 
+      }
+      draw() { 
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; 
+        ctx.shadowBlur = this.blur;
+        ctx.shadowColor = `rgba(212, 175, 55, ${this.opacity})`;
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); 
+        ctx.shadowBlur = 0; // reset for next drawing
+      }
     }
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
+    for (let i = 0; i < 25; i++) particles.push(new Particle()); // Only 25 particles
     function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
     animate();
   </script>
