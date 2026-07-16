@@ -105,15 +105,16 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 .card-cover {
   z-index: 2; transform-origin: left center; background: var(--ivory);
   transition: transform 3s cubic-bezier(0.2, 0.9, 0.1, 1);
-  border: 8px solid #fff; box-shadow: inset 0 0 0 1px var(--gold-dark), inset 0 0 20px rgba(212,175,55,0.1);
+  border: 1px solid var(--gold); border-radius: 8px;
+  box-shadow: inset 0 0 0 8px var(--ivory), inset 0 0 0 9px var(--gold-dark), inset 0 0 30px rgba(212,175,55,0.15);
 }
 .card-container.open .card-cover { transform: rotateY(-165deg); }
 
-.foil-decor { position: absolute; width: 80px; height: 80px; border: 1px solid var(--gold); opacity: 0.4; }
-.foil-decor.tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
-.foil-decor.br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+.foil-decor { position: absolute; width: 60px; height: 60px; border: 1px solid var(--gold); opacity: 0.7; }
+.foil-decor.tl { top: 24px; left: 24px; border-right: none; border-bottom: none; }
+.foil-decor.br { bottom: 24px; right: 24px; border-left: none; border-top: none; }
 
-.cover-title { font-family: var(--font-serif); font-size: 2.8rem; color: var(--maroon); line-height: 1.1; margin: 1rem 0; }
+.cover-title { font-family: var(--font-serif); font-size: 3rem; color: var(--bg-deep); line-height: 1.3; margin: 1.5rem 0; text-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .cover-title span { font-size: 1.2rem; display: block; font-style: normal; margin: 0.5rem 0; }
 
 .btn-luxury {
@@ -126,7 +127,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 .btn-luxury::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: 0.5s; }
 .btn-luxury:hover::after { left: 100%; }
 
-.card-interior { background: var(--bg-core); z-index: 1; transform: rotateY(0deg); border: 2px solid var(--gold-dark); }
+.card-interior { background: var(--bg-core); z-index: 1; transform: rotateY(0deg); border: 1px solid var(--gold); border-radius: 8px; box-shadow: inset 0 0 0 8px var(--bg-core), inset 0 0 0 9px var(--gold-dark); }
 
 /* SECTIONS */
 main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; }
@@ -256,16 +257,16 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         <div class="foil-decor tl"></div>
         <div class="foil-decor br"></div>
         
-        <p class="tracking-ultra" style="color:var(--gold-dark); margin-bottom:1rem;">🪔 Wedding Reception Invitation</p>
-        <h2 class="cover-title">R. Praveenkumar<br><span>❤️</span><br>C. Suryaprabha</h2>
-        <p class="tracking-ultra" style="color:#777; margin: 1rem 0 2rem;">22 August 2026</p>
-        <p style="font-family: var(--font-serif); font-style: italic; color: var(--maroon); margin-bottom: 2rem;">Cordially Invites You</p>
+        <p class="tracking-ultra" style="color:var(--gold-dark); margin-bottom:1.5rem; letter-spacing: 0.4em;">WEDDING RECEPTION</p>
+        <h2 class="cover-title">R. Praveenkumar<br><span style="font-size: 1.8rem; color: var(--gold-dark); font-family: var(--font-serif); display: inline-block; margin: 0.5rem 0;">&amp;</span><br>C. Suryaprabha</h2>
+        <p class="tracking-ultra" style="color:var(--gold-dark); margin: 1.5rem 0 1rem; letter-spacing: 0.3em; font-size: 0.75rem;">22 AUGUST 2026</p>
+        <p style="font-family: var(--font-serif); font-style: italic; color: var(--bg-deep); font-size: 1.2rem; margin-bottom: 2.5rem;">Cordially Invites You</p>
         
         <button class="btn-luxury" id="open-btn">OPEN INVITATION</button>
       </div>
       <div class="card-panel card-interior">
         <div class="paper-texture"></div>
-        <p style="font-family:var(--font-serif); font-size:1.2rem; font-style:italic; max-width:80%; line-height:2;">
+        <p style="font-family:var(--font-serif); font-size:1.4rem; font-style:italic; max-width:80%; line-height:2; color: var(--ivory);">
           "Two souls, one beautiful journey. Join us as we celebrate the beginning of our forever."
         </p>
       </div>
