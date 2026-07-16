@@ -270,7 +270,49 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     #main.zoom-reveal.active {
       transform: scale(1); opacity: 1;
     }
-</style>
+
+    /* FLOWER SHOWER */
+    #flower-shower, #flower-shower-back {
+      position: fixed; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    #flower-shower { z-index: 9999; }
+    #flower-shower-back { z-index: 5; } /* Behind modal but above background */
+    
+    .flower-wrapper {
+      position: absolute;
+      top: -10vh;
+      opacity: 0;
+      animation: fallDown var(--duration) var(--delay) linear forwards;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+    }
+    
+    .flower-sway {
+      animation: sway var(--swayDuration) ease-in-out infinite alternate;
+    }
+    
+    .flower-img {
+      width: var(--size);
+      height: auto;
+      animation: spin3D var(--spinDuration) linear infinite;
+    }
+    
+    @keyframes fallDown {
+      0% { transform: translate3d(var(--startX), 0, var(--startZ)); opacity: 0; }
+      10% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translate3d(var(--endX), 110vh, var(--endZ)); opacity: 0; }
+    }
+    
+    @keyframes sway {
+      0% { transform: translateX(0px); }
+      100% { transform: translateX(var(--swayAmount)); }
+    }
+    
+    @keyframes spin3D {
+      0% { transform: rotate3d(var(--rx), var(--ry), var(--rz), 0deg); }
+      100% { transform: rotate3d(var(--rx), var(--ry), var(--rz), 360deg); }
+    }
+  </style>
 </head>
 <body class="locked">
 
