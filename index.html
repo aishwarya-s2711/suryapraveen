@@ -297,7 +297,17 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 
         <p style="font-family: var(--font-serif); font-style: italic; color: var(--bg-deep); font-size: 1.3rem; margin-bottom: 2.5rem;">Cordially Invites You</p>
         
-        <button id="open-btn" style="background:var(--bg-deep); color:var(--gold); border:1px solid var(--gold); border-radius:50px; padding:1rem 3rem; font-family:var(--font-sans); font-size:0.75rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; box-shadow:0 15px 35px rgba(14,34,61,0.4); text-shadow:0 0 8px rgba(212,175,55,0.4); transition:all 0.3s ease; position:relative; z-index:10;" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(14,34,61,0.6)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 15px 35px rgba(14,34,61,0.4)';">OPEN INVITATION</button>
+        <button id="open-btn" style="background:var(--bg-deep); color:var(--gold); border:1px solid var(--gold); border-radius:50px; padding:1.2rem 3rem 0.8rem; font-family:var(--font-sans); font-size:0.75rem; font-weight:500; letter-spacing:0.3em; text-transform:uppercase; cursor:pointer; box-shadow:0 15px 35px rgba(0,0,0,0.3); transition:all 0.3s ease; position:relative; z-index:10; display:flex; flex-direction:column; align-items:center; gap:0.6rem; margin:0 auto;" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)';">
+          <span>OPEN INVITATION</span>
+          <svg width="60" height="12" viewBox="0 0 60 12" xmlns="http://www.w3.org/2000/svg">
+            <line x1="12" y1="6" x2="25" y2="6" stroke="var(--gold)" stroke-width="1"/>
+            <path d="M 27,6 Q 30,2 33,6 Q 30,10 27,6 Z" fill="none" stroke="var(--gold)" stroke-width="1"/>
+            <circle cx="30" cy="6" r="1.5" fill="var(--gold)"/>
+            <line x1="35" y1="6" x2="48" y2="6" stroke="var(--gold)" stroke-width="1"/>
+            <circle cx="8" cy="6" r="1.5" fill="var(--gold)"/>
+            <circle cx="52" cy="6" r="1.5" fill="var(--gold)"/>
+          </svg>
+        </button>
       </div>
       <div class="card-panel card-interior">
         <div class="paper-texture"></div>
