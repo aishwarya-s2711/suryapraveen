@@ -706,110 +706,88 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       } catch (e) { console.log('Audio not supported', e); }
     }
 
-    // Build cinematic overlay DOM
-    const cineOverlay = document.createElement('div');
-    cineOverlay.id = 'cinematic-overlay';
-    cineOverlay.innerHTML = `
-      <div id="cinematic-light"></div>
-      <canvas id="cinematic-canvas"></canvas>
-      <div id="cinematic-crest">
-        <svg viewBox="0 0 200 200" style="width:160px; height:160px; filter: drop-shadow(0 0 15px rgba(212,175,55,0.6));">
-          <path d="M100,10 C120,40 160,40 190,50 C160,60 120,60 100,90 C80,60 40,60 10,50 C40,40 80,40 100,10 Z" fill="none" stroke="var(--gold)" stroke-width="2" opacity="0.8"/>
-          <circle cx="100" cy="100" r="40" fill="none" stroke="var(--gold)" stroke-width="1.5" />
-          <polygon points="100,75 115,100 100,125 85,100" fill="var(--gold)"/>
-        </svg>
-      </div>
-    `;
-    document.body.appendChild(cineOverlay);
-    main.classList.add('zoom-reveal');
-    
-    openBtn.addEventListener('click', () => {
-      // 1. Instantly fade to dark navy
-      cineOverlay.classList.add('active');
-      document.body.classList.add('locked'); // ensure locked
+        openBtn.addEventListener('click', () => {
+      // 1. Open the card
+      card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      card.classList.add('open');
+      document.body.classList.add('locked');
       
-      // Setup canvas physics
-      const cvs = document.getElementById('cinematic-canvas');
-      const cx = cvs.getContext('2d');
-      cvs.width = window.innerWidth; cvs.height = window.innerHeight;
+      // 2. Realistic Flower & Leaf Shower
+      const showerContainer = document.createElement('div');
+      showerContainer.style.position = 'fixed';
+      showerContainer.style.inset = '0';
+      showerContainer.style.pointerEvents = 'none';
+      showerContainer.style.zIndex = '9999';
+      showerContainer.style.overflow = 'hidden';
+      document.body.appendChild(showerContainer);
       
-      const parts = [];
-      const isPrefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const count = isPrefersReduced ? 20 : 100;
+      // Reliable public domain / free-to-use transparent PNGs for petals and leaves
+      const images = [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Rose_petal_transparent.png/320px-Rose_petal_transparent.png',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Leaf_transparent_background.png/320px-Leaf_transparent_background.png'
+      ];
       
-      for(let i=0; i<count; i++) {
-        parts.push({
-          x: Math.random() * cvs.width,
-          y: -Math.random() * cvs.height, // Start above screen
-          size: Math.random() * 4 + 2,
-          speedY: Math.random() * 3 + 1,
-          speedX: (Math.random() - 0.5) * 2,
-          opacity: Math.random() * 0.8 + 0.2,
-          isStar: Math.random() > 0.8,
-          angle: Math.random() * Math.PI * 2,
-          spin: (Math.random() - 0.5) * 0.1,
-          wobble: Math.random() * Math.PI * 2,
-          wobbleSpeed: Math.random() * 0.05
-        });
-      }
-      
-      let animFrame;
-      function renderCine() {
-        cx.clearRect(0,0,cvs.width,cvs.height);
-        parts.forEach(p => {
-          p.y += p.speedY;
-          p.x += p.speedX + Math.sin(p.wobble) * 1;
-          p.wobble += p.wobbleSpeed;
-          p.angle += p.spin;
-          
-          cx.save();
-          cx.translate(p.x, p.y);
-          cx.rotate(p.angle);
-          
-          cx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`;
-          cx.shadowColor = 'rgba(212,175,55,0.8)';
-          cx.shadowBlur = p.speedY * 2; // Motion blur
-          
-          if(p.isStar) {
-            // 4 point star
-            cx.beginPath();
-            cx.moveTo(0, -p.size*2);
-            for(let i=0; i<4; i++){
-              cx.rotate(Math.PI/4); cx.lineTo(0, -p.size*0.5);
-              cx.rotate(Math.PI/4); cx.lineTo(0, -p.size*2);
-            }
-            cx.fill();
-          } else {
-            // Petal
-            cx.scale(1, 0.6);
-            cx.beginPath(); cx.arc(0,0, p.size, 0, Math.PI*2); cx.fill();
-          }
-          cx.restore();
-        });
-        animFrame = requestAnimationFrame(renderCine);
-      }
-
-      // Start sequence
-      setTimeout(() => {
-        // 2. Warm golden light expands + logo scales up + Chime
-        document.getElementById('cinematic-light').style.transform = 'translate(-50%, -50%) scale(1.5)';
-        document.getElementById('cinematic-light').style.opacity = '1';
-        document.getElementById('cinematic-crest').style.transform = 'scale(1)';
-        document.getElementById('cinematic-crest').style.opacity = '1';
+      // Generate 100 items (80-120 range requested)
+      for(let i=0; i<100; i++) {
+        const img = document.createElement('img');
+        img.src = images[Math.floor(Math.random() * images.length)];
         
-        playChime();
-        renderCine(); // Start particles
-      }, 400);
-
-      // Reveal main site
+        // Randomize initial properties
+        const size = Math.random() * 20 + 20; // 20px to 40px
+        img.style.position = 'absolute';
+        img.style.left = (Math.random() * 100) + 'vw';
+        img.style.top = '-10vh';
+        img.style.width = size + 'px';
+        img.style.height = 'auto';
+        img.style.opacity = (Math.random() * 0.4 + 0.6).toString();
+        
+        showerContainer.appendChild(img);
+        
+        // Animation variables
+        const duration = Math.random() * 1000 + 4000; // 4 to 5 seconds
+        const delay = Math.random() * 500; // stagger start times slightly
+        const endX = (Math.random() - 0.5) * 300; // side to side movement
+        const endRotation = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 720 + 360);
+        
+        // Web Animations API for smooth 60FPS GPU accelerated transforms
+        const animation = img.animate([
+          { transform: `translate3d(0, 0, 0) rotate(0deg)` },
+          { transform: `translate3d(${endX/2}px, 60vh, 0) rotate(${endRotation/2}deg)`, offset: 0.5 },
+          { transform: `translate3d(${endX}px, 110vh, 0) rotate(${endRotation}deg)` }
+        ], {
+          duration: duration,
+          delay: delay,
+          easing: 'ease-in',
+          fill: 'forwards'
+        });
+        
+        animation.onfinish = () => img.remove();
+      }
+      
+      // 3. After 5 seconds, reveal the main invitation
       setTimeout(() => {
-        cineOverlay.style.opacity = '0'; // Fade out overlay
-        overlay.classList.add('fade-out'); // Fade out the old cover simultaneously
-        main.style.opacity = '1';
-        main.classList.add('active'); // Zoom reveal
+        showerContainer.remove();
+        overlay.classList.add('fade-out');
         document.body.classList.remove('locked');
+        main.style.opacity = '1';
         musicWidget.classList.add('show');
+        checkScroll();
         
+        // Start Autoscroll
+        let autoScrollReq;
+        const doAutoScroll = () => {
+          window.scrollBy({ top: 0.4, behavior: 'instant' });
+          if ((window.innerHeight + window.scrollY) < document.body.offsetHeight - 2) {
+            autoScrollReq = requestAnimationFrame(doAutoScroll);
+          }
+        };
+        autoScrollReq = requestAnimationFrame(doAutoScroll);
+        const stopAutoScroll = () => cancelAnimationFrame(autoScrollReq);
+        window.addEventListener('wheel', stopAutoScroll, {once: true});
+        window.addEventListener('touchstart', stopAutoScroll, {once: true});
+        window.addEventListener('mousedown', stopAutoScroll, {once: true});
+        
+        // Audio
         if (isYtReady) {
           if (isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
           else { fadeAudio(currentVol, 2000); }
@@ -817,12 +795,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
           vinylBtn.classList.add('spinning');
           playPauseBtn.innerText = '⏸';
         }
-        
-        setTimeout(() => {
-          cancelAnimationFrame(animFrame);
-          cineOverlay.remove();
-        }, 1000); // cleanup
-      }, 4000);
+      }, 5000);
     });
 
     /* ==================================
