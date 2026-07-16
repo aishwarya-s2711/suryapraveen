@@ -630,7 +630,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         window.addEventListener('wheel', stopAutoScroll, {once: true});
         window.addEventListener('touchstart', stopAutoScroll, {once: true});
         window.addEventListener('mousedown', stopAutoScroll, {once: true});
-      }, 20000);
+      }, 10000);
 
       if (isYtReady) {
         if (isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
