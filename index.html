@@ -611,20 +611,6 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
     openBtn.addEventListener('click', () => {
       card.style.transform = 'rotateY(0deg) rotateX(0deg)';
       card.classList.add('open');
-      
-      const emojis = ['🌸', '🌼', '🍃'];
-      for(let i=0; i<50; i++) {
-        setTimeout(() => {
-          const p = document.createElement('div');
-          p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-          p.style.position = 'fixed'; p.style.left = Math.random() * 100 + 'vw'; p.style.top = '-10vh';
-          p.style.zIndex = 9999; p.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem'; p.style.transition = 'all 8s linear';
-          document.body.appendChild(p);
-          setTimeout(() => { p.style.transform = `translateY(110vh) rotate(${Math.random() * 720}deg) translateX(${(Math.random()-0.5)*200}px)`; }, 50);
-          setTimeout(() => p.remove(), 8000);
-        }, i * 100);
-      }
-
       setTimeout(() => {
         overlay.classList.add('fade-out');
         document.body.classList.remove('locked');
@@ -647,7 +633,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         window.addEventListener('wheel', stopAutoScroll, {once: true});
         window.addEventListener('touchstart', stopAutoScroll, {once: true});
         window.addEventListener('mousedown', stopAutoScroll, {once: true});
-      }, 4500);
+      }, 20000);
 
       if (isYtReady) {
         if (isMuted) { ytPlayer.setVolume(0); ytPlayer.playVideo(); }
