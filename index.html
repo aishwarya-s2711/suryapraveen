@@ -722,7 +722,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
       document.body.appendChild(showerContainer);
       
       const emojis = ['🌸', '🌼', '🍃', '🍂', '🏵', '🌺'];
-      const numEmojis = Math.floor(Math.random() * 16) + 25; // 25 to 40 emojis
+      const numEmojis = Math.floor(Math.random() * 16) + 45; // 45 to 60 emojis
       
       for(let i=0; i<numEmojis; i++) {
         const span = document.createElement('span');
@@ -738,7 +738,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         
         showerContainer.appendChild(span);
         
-        const duration = Math.random() * 1000 + 3000; // 3 to 4 seconds to fall
+        const duration = Math.random() * 2000 + 5000; // 5 to 7 seconds to fall
         const delay = Math.random() * 1500; // stagger start times slightly
         const endX = (Math.random() - 0.5) * 200; // left-right drift
         const endRotation = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 360 + 180);
@@ -757,12 +757,12 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         animation.onfinish = () => span.remove();
       }
       
-      // Stop automatically after 4 seconds (removing container)
+      // Stop automatically after 7 seconds (removing container)
       setTimeout(() => {
         if(showerContainer && showerContainer.parentNode) {
             showerContainer.remove();
         }
-      }, 4000);
+      }, 7000);
       
       // Reveal the main invitation (wait time = 10s as per previous instructions)
       setTimeout(() => {
