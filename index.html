@@ -7,23 +7,24 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
 /* ============================
    ULTRA-PREMIUM LUXURY THEME V4
 ============================ */
 :root {
-  --bg-core: #050302;
-  --bg-deep: #0a0604;
-  --ivory: #fffaef;
-  --gold: #d4af37;
-  --gold-light: #ebd298;
+  --bg-core: #07111F;
+  --bg-deep: #0E223D;
+  --ivory: #FAFAFA;
+  --gold: #D4AF37;
+  --gold-light: #F5E6A9;
   --gold-dark: #8c6a1e;
   --maroon: #2a0808;
   
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Poppins', sans-serif;
+  --radius: 28px;
   
   --trans-slow: all 2s cubic-bezier(0.2, 0.9, 0.3, 1);
 }
@@ -38,15 +39,15 @@ body.locked { overflow: hidden; }
 
 body::after {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 100% 100%, rgba(42, 8, 8, 0.2) 0%, transparent 50%);
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 40%),
+              radial-gradient(circle at 100% 100%, rgba(14, 34, 61, 0.5) 0%, transparent 60%);
 }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-core); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 10px; }
 
-h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: var(--ivory); }
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: var(--ivory); letter-spacing: 0.05em; }
 .text-gold { color: var(--gold); }
 .tracking-ultra { letter-spacing: 0.4em; text-transform: uppercase; font-size: 0.65rem; color: var(--gold-light); }
 
@@ -77,7 +78,7 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 /* 3D INVITATION OVERLAY */
 #invite-overlay {
   position: fixed; inset: 0; z-index: 9000;
-  background: radial-gradient(circle at center, rgba(42,8,8,0.95) 0%, rgba(5,3,2,0.98) 100%);
+  background: radial-gradient(circle at center, rgba(14,34,61,0.95) 0%, rgba(7,17,31,0.98) 100%);
   display: flex; align-items: center; justify-content: center; perspective: 2500px;
   transition: opacity 2s var(--trans-slow);
 }
@@ -116,17 +117,20 @@ h1, h2, h3, h4, h5 { font-family: var(--font-serif); font-weight: 400; color: va
 .cover-title span { font-size: 1.2rem; display: block; font-style: normal; margin: 0.5rem 0; }
 
 .btn-luxury {
-  background: transparent; color: var(--gold); border: 1px solid var(--gold);
-  padding: 1rem 3rem; font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.3em;
-  text-transform: uppercase; cursor: pointer; transition: all 0.5s ease; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--bg-core); border: none; border-radius: 50px;
+  padding: 1rem 3rem; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;
+  box-shadow: 0 5px 15px rgba(212,175,55,0.2);
 }
-.btn-luxury:hover { background: var(--gold); color: var(--bg-core); font-weight:bold; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.4); }
+.btn-luxury:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(212,175,55,0.5); color: var(--bg-core); }
+.btn-luxury::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: 0.5s; }
+.btn-luxury:hover::after { left: 100%; }
 
 .card-interior { background: var(--bg-core); z-index: 1; transform: rotateY(0deg); border: 2px solid var(--gold-dark); }
 
 /* SECTIONS */
 main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; }
-.section-pad { padding: 3rem 2rem; position: relative; display: flex; flex-direction: column; align-items: center; }
+.section-pad { padding: 6rem 2rem; position: relative; display: flex; flex-direction: column; align-items: center; }
 .container { max-width: 1000px; margin: 0 auto; text-align: center; }
 
 /* HERO */
@@ -134,16 +138,18 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
 .hero-names { font-size: clamp(3rem, 7vw, 6rem); line-height: 1; margin: 2rem 0; text-shadow: 0 10px 40px rgba(212,175,55,0.2); }
 .glowing-heart { display: inline-block; font-size: 1.5rem; margin: 0 1.5rem; color: var(--gold); animation: heartbeat 2s infinite ease-in-out; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 20px var(--gold)); } }
-.hero-glass-desc { margin: 4rem auto; max-width: 550px; padding: 2.5rem; background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent); border: 1px solid rgba(212,175,55,0.2); border-top: 1px solid rgba(212,175,55,0.4); border-radius: 20px; backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+.hero-glass-desc { margin: 4rem auto; max-width: 550px; padding: 3.5rem; background: rgba(14,34,61,0.3); border: 1px solid rgba(212,175,55,0.3); border-radius: var(--radius); backdrop-filter: blur(24px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); transition: transform 0.3s ease; }
+.hero-glass-desc:hover { transform: scale(1.02); }
 
 
 
 /* EVENT & CALENDAR */
 .premium-card {
-  background: rgba(15,10,7,0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(212,175,55,0.3); border-top: 1px solid rgba(212,175,55,0.5); border-radius: 16px; padding: 5rem 3rem; max-width: 800px; margin: 0 auto; position: relative;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+  background: rgba(14,34,61,0.3); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212,175,55,0.3); border-radius: var(--radius); padding: 6rem 4rem; max-width: 800px; margin: 0 auto; position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4); transition: transform 0.3s ease;
 }
+.premium-card:hover { transform: scale(1.02); }
 @keyframes subtleFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
 .floral-arch { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 150px; opacity: 0.7; animation: subtleFloat 6s ease-in-out infinite; }
 
@@ -255,7 +261,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         <p class="tracking-ultra" style="color:#777; margin: 1rem 0 2rem;">22 August 2026</p>
         <p style="font-family: var(--font-serif); font-style: italic; color: var(--maroon); margin-bottom: 2rem;">Cordially Invites You</p>
         
-        <button class="btn-luxury" style="background:var(--gold); color:var(--bg-core); font-weight:bold;" id="open-btn">OPEN INVITATION</button>
+        <button class="btn-luxury" id="open-btn">OPEN INVITATION</button>
       </div>
       <div class="card-panel card-interior">
         <div class="paper-texture"></div>
@@ -288,7 +294,7 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
         <div class="hero-glass-desc reveal" style="transition-delay:0.4s;">
           <p>"With hearts full of joy, we warmly invite you to celebrate our Wedding Reception and bless us with your gracious presence."</p>
         </div>
-        <button id="save-date-btn" style="margin-top:2rem; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 1rem 3rem; font-family: var(--font-sans); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; border-radius: 30px; box-shadow: 0 4px 15px rgba(212,175,55,0.2); cursor: pointer; transition: none;">Save the Date</button>
+        <button id="save-date-btn" class="btn-luxury" style="margin-top:2rem;">Save the Date</button>
       </div>
     </section>
 
