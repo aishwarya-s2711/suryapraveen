@@ -495,13 +495,18 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
           <div>
             <p class="tracking-ultra">Venue</p>
             <h3 style="font-size:1.8rem; margin:1rem 0; color:var(--gold);">Yamuna Palace</h3>
-            <p style="line-height: 1.8;">319/1 Mullupadi Village<br>Pollachi Main Road<br>Mulluppadi<br>Tamil Nadu – 642109</p>
+            <p style="line-height: 1.8; margin-bottom: 2rem;">319/1 Mullupadi Village<br>Pollachi Main Road<br>Mulluppadi<br>Tamil Nadu – 642109</p>
             
-            <div class="map-wrapper">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.6917637500595!2d76.99342711531238!3d10.445963292546416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba836b2809fb0ab%3A0xc3c9a0937a075306!2sPollachi%20Main%20Rd%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1689000000000!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 0.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 0.9rem; color: #fff;">Yamuna Palace, Mullupadi, Pollachi</span>
+                    <a href="https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi" target="_blank" style="color: var(--gold); font-weight: bold; text-decoration: underline; font-size: 0.9rem;">Open in Maps</a>
+                </div>
             </div>
             
-            <button onclick="window.open('https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi', '_blank')" class="btn-luxury" style="margin-top:2rem; background: var(--gold); color: #000; font-weight: bold; border: none; position: relative; z-index: 10; cursor: pointer;">Open in Maps</button>
+            <div class="map-wrapper" style="margin-top: 0;">
+              <iframe src="https://maps.google.com/maps?q=Yamuna%20Palace%20Mullupadi%20Pollachi&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
         </div>
       </div>
