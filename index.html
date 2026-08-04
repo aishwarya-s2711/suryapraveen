@@ -497,15 +497,12 @@ main { opacity: 0; transition: opacity 2s ease; position: relative; z-index: 2; 
             <h3 style="font-size:1.8rem; margin:1rem 0; color:var(--gold);">Yamuna Palace</h3>
             <p style="line-height: 1.8; margin-bottom: 2rem;">319/1 Mullupadi Village<br>Pollachi Main Road<br>Mulluppadi<br>Tamil Nadu – 642109</p>
             
-            <div style="display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 0.5rem;">
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="font-size: 0.9rem; color: #fff;">Yamuna Palace, Mullupadi, Pollachi</span>
-                    <a href="https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi" target="_blank" style="color: var(--gold); font-weight: bold; text-decoration: underline; font-size: 0.9rem;">Open in Maps</a>
-                </div>
-            </div>
-            
             <div class="map-wrapper" style="margin-top: 0;">
               <iframe src="https://maps.google.com/maps?q=Yamuna%20Palace%20Mullupadi%20Pollachi&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+            <div style="display: flex; justify-content: center; width: 100%; margin-top: 2rem;">
+              <button onclick="window.open('https://www.google.com/maps/search/Yamuna+Palace+Mullupadi+Pollachi', '_blank')" class="btn-luxury" style="background: var(--gold); color: #000; font-weight: bold; border: none; position: relative; z-index: 10; cursor: pointer;">Open in Maps</button>
             </div>
           </div>
         </div>
